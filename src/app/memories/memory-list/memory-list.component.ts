@@ -12,6 +12,7 @@ export class MemoryListComponent implements OnInit {
   _listFilter : string;
   filteredMemories : IMemory[];
   memories: IMemory[];
+  errorMessage: string;
   
   @Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
@@ -39,8 +40,15 @@ export class MemoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-    this.memories = this.memoryService.getMemories(); //memories vullen met data
-    this.filteredMemories = this.memories;   //de gefilterde lijst vullen met alle memories
+    this.memories = this.memoryService.getMemories().subscribe({
+      next: mem => {
+        this.memories = mem
+        this.filteredMemories = this.memories; 
+      },
+      error: err => this.errorMessage = err
+    }); //memories vullen met data
+
+    
   }
 
 }
