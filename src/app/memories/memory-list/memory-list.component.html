@@ -1,36 +1,33 @@
-<div class='card-body'>
-  <div class='row'>
-    <div class='col-sm-2'>Zoeken:</div>
-    <div class='col-sm-4'>
-      <input type='text' [(ngModel)] = 'listFilter'>
+<div class="card-body">
+  <div class="row">
+    <div class="col-sm-2">Zoeken:</div>
+    <div class="col-sm-4">
+      <input type="text" [(ngModel)]="listFilter" />
     </div>
   </div>
-
 </div>
 <div class="card-deck">
-  <div class="card"  *ngIf="memories && memories.length">
+  <div class="card" *ngIf="memories && memories.length">
     <div class="col-sm-4">
-      
       <div *ngFor="let memory of filteredMemories">
         <div class="card-header">
           <h5>{{ memory.title }}</h5>
         </div>
-        <img
-          class="card-img-top"
-          [src]="memory.imageUrl"
-          [title]="memory.title"
-          alt="{{ memory.title }}"
-        />
+        <a href="#" (click)="clickMemory()">
+          <img
+            class="card-img-top"
+            [src]="memory.imageUrl"
+            [title]="memory.title"
+            alt="{{ memory.title }}"
+          />
+        </a>
         <div class="card-body">
-          <h5 class="card-title">{{ memory.title }}</h5>
           <p class="card-text">{{ memory.subTitle }}</p>
-          <a href="#" class="btn btn-primary" (click)="clickMemory()"
-            >Herbeleef</a
-          >
         </div>
         <div class="card-footer text-muted">
           {{ memory.startDate | date: "dd/MM/yyyy" }} -
-          {{ memory.endDate | date: "dd/MM/yyyy" }}
+          {{ memory.endDate | date: "dd/MM/yyyy" }} 
+          <app-location [country]='memory.location.country' [city]='memory.location.city'></app-location>
         </div>
       </div>
     </div>

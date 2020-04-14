@@ -18,7 +18,12 @@ export class MemoryListComponent implements OnInit {
         "subTitle": "Kuieren op de met zon overgoten witte stranden.",
         "startDate": '2020-03-11T18:25:43.511Z',
         "endDate": '2020-03-11T18:25:43.511Z',
-        "imageUrl": "assets/Sun.jpg"
+        "imageUrl": "assets/Sun.jpg",
+        "location": {
+          "country": "Kaapverdië",
+          "city": "Sal Rei"
+        }
+        
       },
       {
         "memoryId" : 2,
@@ -26,7 +31,11 @@ export class MemoryListComponent implements OnInit {
        "subTitle": "Eindeloos verdwalen het groen van Etretat.",
        "startDate": '2020-01-07T18:25:43.511Z',
         "endDate": '2020-01-10T18:25:43.511Z',
-       "imageUrl": "assets/Forest.jpg"
+       "imageUrl": "assets/Forest.jpg",
+       "location": {
+        "country": "Frankrijk",
+        "city": "Etretat"
+      }
       }
     ];
 

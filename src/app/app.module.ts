@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MemoryListComponent } from './memories/memory-list/memory-list.component';
+import { LocationComponent } from './memories/location/location.component';
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
-    AppComponent, MemoryListComponent
+    AppComponent, MemoryListComponent, LocationComponent
   ],
   imports: [
     BrowserModule, 

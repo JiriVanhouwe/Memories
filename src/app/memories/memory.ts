@@ -1,3 +1,5 @@
+import { ILocation } from './location';
+
 export interface IMemory{
     memoryId: number;
     title: string;
@@ -5,4 +7,5 @@ export interface IMemory{
     startDate: string;
     endDate: string;
     imageUrl: string;
+    location: ILocation;
 }
