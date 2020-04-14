@@ -1,8 +1,17 @@
+<div class='card-body'>
+  <div class='row'>
+    <div class='col-sm-2'>Zoeken:</div>
+    <div class='col-sm-4'>
+      <input type='text' [(ngModel)] = 'listFilter'>
+    </div>
+  </div>
+
+</div>
 <div class="card-deck">
   <div class="card"  *ngIf="memories && memories.length">
     <div class="col-sm-4">
       
-      <div *ngFor="let memory of memories">
+      <div *ngFor="let memory of filteredMemories">
         <div class="card-header">
           <h5>{{ memory.title }}</h5>
         </div>

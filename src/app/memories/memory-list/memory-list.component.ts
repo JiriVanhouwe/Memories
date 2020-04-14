@@ -8,6 +8,9 @@ import { IMemory } from '../memory';
 })
 export class MemoryListComponent implements OnInit {
 
+  _listFilter : string;
+  filteredMemories : IMemory[];
+
     memories: IMemory[] =[
       {
         "memoryId" : 1,
@@ -28,7 +31,22 @@ export class MemoryListComponent implements OnInit {
     ];
 
   constructor() { 
-    
+    this.filteredMemories = this.memories;
+    this.listFilter = "";
+  }
+
+  get listFilter(): string{
+    return this._listFilter;
+  }
+  
+  set listFilter(value : string){
+    this._listFilter = value;
+    this.filteredMemories = this.listFilter ? this.performFilter(this.listFilter) : this.memories;
+  }
+
+  performFilter(filterBy: string): IMemory[] { //filter op title of subtitle
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.memories.filter((memory: IMemory) => memory.title.toLocaleLowerCase().indexOf(filterBy) !== -1 || memory.subTitle.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   clickMemory() : void{
