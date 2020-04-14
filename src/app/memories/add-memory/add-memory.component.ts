@@ -14,4 +14,8 @@ export class AddMemoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addMemory(){
+    console.log("Een nieuwe memory maken.");
+  }
+
 }

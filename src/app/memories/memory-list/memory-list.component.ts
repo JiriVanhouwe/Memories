@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { IMemory } from '../memory';
 
 @Component({
@@ -10,6 +10,8 @@ export class MemoryListComponent implements OnInit {
 
   _listFilter : string;
   filteredMemories : IMemory[];
+
+  @Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
     memories: IMemory[] =[
       {
@@ -36,7 +38,20 @@ export class MemoryListComponent implements OnInit {
         "country": "Frankrijk",
         "city": "Etretat"
       }
-      }
+      },
+
+      {
+          "memoryId" : 3,
+          "title": "Diner in Amigo Amigo",
+         "subTitle": "Culinair genieten in Gent!",
+         "startDate": '2020-02-20T18:25:43.511Z',
+          "endDate": '2020-02-20T18:25:43.511Z',
+         "imageUrl": "assets/Amigo.jpg",
+         "location": {
+          "country": "België",
+          "city": "Gent"
+        }
+        }
     ];
 
   constructor() { 
@@ -58,11 +73,14 @@ export class MemoryListComponent implements OnInit {
     return this.memories.filter((memory: IMemory) => memory.title.toLocaleLowerCase().indexOf(filterBy) !== -1 || memory.subTitle.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
-  clickMemory() : void{
+  clickMemory(memory: IMemory) : void{
       //toont alle foto's van een memory
+      
+      console.log("Memory openen" + memory.memoryId);
   }
 
   ngOnInit(): void {
+    
     console.log("init methode");
   }
 

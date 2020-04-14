@@ -6,15 +6,16 @@
     </div>
   </div>
 </div>
-<app-add-memory></app-add-memory>
-<div class="card-deck">
-  <div class="card" *ngIf="memories && memories.length">
-    <div class="col-sm-4">
+
+<div class="row">
+  <app-add-memory></app-add-memory>
+  <div class="card-deck">
+    <div class="card" *ngIf="memories && memories.length">
       <div *ngFor="let memory of filteredMemories">
         <div class="card-header">
           <h5>{{ memory.title }}</h5>
         </div>
-        <a href="#" (click)="clickMemory()">
+        <a href="#" (click)="clickMemory(memory)">
           <img
             class="card-img-top"
             [src]="memory.imageUrl"
@@ -27,8 +28,11 @@
         </div>
         <div class="card-footer text-muted">
           {{ memory.startDate | date: "dd/MM/yyyy" }} -
-          {{ memory.endDate | date: "dd/MM/yyyy" }} 
-          <app-location [country]='memory.location.country' [city]='memory.location.city'></app-location>
+          {{ memory.endDate | date: "dd/MM/yyyy" }}
+          <app-location
+            [country]="memory.location.country"
+            [city]="memory.location.city"
+          ></app-location>
         </div>
       </div>
     </div>
