@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MemoryListComponent } from './memories/memory-list/memory-list.component';
 import { LocationComponent } from './memories/location/location.component';
 import { AddMemoryComponent } from './memories/add-memory/add-memory.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
@@ -12,7 +13,8 @@ import { AddMemoryComponent } from './memories/add-memory/add-memory.component';
   ],
   imports: [
     BrowserModule, 
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent] //de startcomponent van onze applicatie

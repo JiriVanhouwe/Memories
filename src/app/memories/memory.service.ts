@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { IMemory } from './memory';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MemoryService {
+  private url = 'api/memories';
+
+  constructor(private http: HttpClient){
+
+  }
 
     getMemories() : IMemory[]{
         return [
