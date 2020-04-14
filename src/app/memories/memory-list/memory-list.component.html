@@ -1,10 +1,29 @@
-<div class="card" style="width: 18rem;" *ngIf="memories && memories.length">
-  <div *ngFor='let memory of memories'>
-    <img class="card-img-top" [src]='memory.image' [title]='memory.title' alt="{{memory.title}}" />
-    <div class="card-body">
-      <h5 class="card-title">{{ memory.title }}</h5>
-      <p class="card-text">{{ memory.subTitle }}</p>
-      <a href="#" class="btn btn-primary" (click)='clickMemory()'>Herbeleef</a>
+<div class="card-deck">
+  <div class="card"  *ngIf="memories && memories.length">
+    <div class="col-sm-4">
+      
+      <div *ngFor="let memory of memories">
+        <div class="card-header">
+          <h5>{{ memory.title }}</h5>
+        </div>
+        <img
+          class="card-img-top"
+          [src]="memory.imageUrl"
+          [title]="memory.title"
+          alt="{{ memory.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ memory.title }}</h5>
+          <p class="card-text">{{ memory.subTitle }}</p>
+          <a href="#" class="btn btn-primary" (click)="clickMemory()"
+            >Herbeleef</a
+          >
+        </div>
+        <div class="card-footer text-muted">
+          {{ memory.startDate | date: "dd/MM/yyyy" }} -
+          {{ memory.endDate | date: "dd/MM/yyyy" }}
+        </div>
+      </div>
     </div>
   </div>
 </div>

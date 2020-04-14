@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IMemory } from '../memory';
 
 @Component({
   selector: 'app-memory-list',
@@ -6,21 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./memory-list.component.css']
 })
 export class MemoryListComponent implements OnInit {
-    title: string = "Reis Kaapverdië";
-    subTitle: string = "Kuieren op de met zon overgoten witte stranden.";
-    memories: any[] =[
+
+    memories: IMemory[] =[
       {
         "memoryId" : 1,
         "title": "Reis kaapverdië",
         "subTitle": "Kuieren op de met zon overgoten witte stranden.",
-        "image": "assets/Sun.jpg"
+        "startDate": '2020-03-11T18:25:43.511Z',
+        "endDate": '2020-03-11T18:25:43.511Z',
+        "imageUrl": "assets/Sun.jpg"
       },
       {
         "memoryId" : 2,
         "title": "Wandeling Etretat",
        "subTitle": "Eindeloos verdwalen het groen van Etretat.",
-       "image": "assets/Forest.jpg"
-
+       "startDate": '2020-01-07T18:25:43.511Z',
+        "endDate": '2020-01-10T18:25:43.511Z',
+       "imageUrl": "assets/Forest.jpg"
       }
     ];
 
@@ -33,6 +36,7 @@ export class MemoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("init methode");
   }
 
 }
