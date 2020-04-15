@@ -1,4 +1,4 @@
-<div class="container"><div class="card-body">
+<div class="card-body">
   <div class="row">
     <div class="col-2">Zoeken:</div>
     <div class="col-4">
@@ -6,11 +6,12 @@
     </div>
   </div>
 </div>
-</div>
 
-<div class="container">
+
   <div class="row">
-    <app-add-memory class="col-4"></app-add-memory>
+    <a [routerLink]="['/memories/add']">
+      <i class="fas fa-plus fa-4x"></i>
+    </a>
     <div class="card-deck">
       <div *ngIf="memories$ | async as memories">
         <div *ngIf="memories && memories.length">
@@ -18,7 +19,7 @@
             <div class="card-header">
               <h5>{{ memory.title }}</h5>
             </div>
-            <a href="#" (click)="clickMemory(memory)">
+            <a [routerLink]="['/memories', memory.memoryId]">
               <img
                 class="card-img-top"
                 [src]="memory.imageUrl"
@@ -42,4 +43,6 @@
       </div>
     </div>
   </div>
-</div>
+
+
+

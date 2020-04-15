@@ -9,8 +9,6 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class MemoryService {
-  private url = 'api/memories';
-
   private _memories : Memory[];
   private _memories$ = new BehaviorSubject<Memory[]>([]);
 
