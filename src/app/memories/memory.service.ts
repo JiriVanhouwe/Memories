@@ -15,7 +15,16 @@ export class MemoryService {
   }
 
     getMemories() : Observable<IMemory[]>{
-      return this.http.get<IMemory[]>(this.url).pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
+      return this.http.get<IMemory[]>(this.url)
+        .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
+
+        // return this.http.get(`${environment.apiUrl}/recipes/`).pipe(
+        //   tap(console.log),
+        //   shareReplay(1),
+        //   catchError(this.handleError),
+        //   map((list: any[]): Recipe[] => list.map(Recipe.fromJSON))
+        // );
+
 
         // return [
         //     {
@@ -64,7 +73,7 @@ export class MemoryService {
       if(error.error instanceof ErrorEvent){
         errorMessage = `Er liep iets fout: ${error.error.message}`;
       } else {
-        errorMessage = `De server gaf de code terug: ${error.status}, error message is: ${error.message}`;
+        errorMessage = `De server gaf deze code terug: ${error.status}, error message is: ${error.message}`;
       }
       console.log(errorMessage);
       return throwError(errorMessage);

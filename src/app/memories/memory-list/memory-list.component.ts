@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { IMemory } from '../memory';
 import { MemoryService } from '../memory.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-memory-list',
