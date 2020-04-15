@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMemory } from './memory';
+import { IMemory, Memory } from './memory';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -10,12 +10,16 @@ import { catchError, tap } from 'rxjs/operators';
 export class MemoryService {
   private url = 'api/memories';
 
-  constructor(private http: HttpClient){
+  private _memories : Memory[];
+  private _memories$ = new BehaviorSubject<Memory[]>([]);
 
+  constructor(private http: HttpClient){
+      this.getMemories$().subscribe(rec => this._memories = rec);
+      this._memories$.next(this._memories);
   }
 
-    getMemories() : Observable<IMemory[]>{
-      return this.http.get<IMemory[]>(this.url)
+    getMemories$() : Observable<Memory[]>{
+      return this.http.get<Memory[]>(this.url)
         .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
 
         // return this.http.get(`${environment.apiUrl}/recipes/`).pipe(

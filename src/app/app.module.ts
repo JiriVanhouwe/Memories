@@ -6,10 +6,11 @@ import { MemoryListComponent } from './memories/memory-list/memory-list.componen
 import { LocationComponent } from './memories/location/location.component';
 import { AddMemoryComponent } from './memories/add-memory/add-memory.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MemoryFilterPipe } from './memories/memory-filter-pipe';
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
-    AppComponent, MemoryListComponent, LocationComponent, AddMemoryComponent
+    AppComponent, MemoryListComponent, LocationComponent, AddMemoryComponent, MemoryFilterPipe
   ],
   imports: [
     BrowserModule, 

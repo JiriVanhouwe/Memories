@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { IMemory } from '../memory';
+import { IMemory, Memory } from '../memory';
 import { MemoryService } from '../memory.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-memory-list',
@@ -10,15 +11,23 @@ import { Observable } from 'rxjs';
 })
 
 export class MemoryListComponent implements OnInit {
-  _listFilter : string;
-  filteredMemories : IMemory[];
-  memories: IMemory[];
-  errorMessage: string;
+  private _listFilter : string;
+  public filterMemories$ = new Subject<string>();
+  private _memories$: Observable<Memory[]>;
   
   @Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private memoryService: MemoryService) { 
-    
+    this.filterMemories$.pipe(
+      distinctUntilChanged(),
+      debounceTime(400),
+      map(val => val.toLowerCase())
+    )
+    .subscribe(val => (this.listFilter = val));
+  }
+
+  get memories$(){
+    return this._memories$;
   }
 
   get listFilter(): string{
@@ -27,13 +36,7 @@ export class MemoryListComponent implements OnInit {
   
   set listFilter(value : string){
     this._listFilter = value;
-    this.filteredMemories = this.listFilter ? this.performFilter(this.listFilter) : this.memories;
-  }
-
-  performFilter(filterBy: string): IMemory[] { //filter op title of subtitle
-    filterBy = filterBy.toLocaleLowerCase();
-    return this.memories.filter((memory: IMemory) => memory.title.toLocaleLowerCase().indexOf(filterBy) !== -1 || memory.subTitle.toLocaleLowerCase().indexOf(filterBy) !== -1);
-  }
+    }
 
   clickMemory(memory: IMemory) : void{
       //toont alle foto's van een memory   
@@ -41,15 +44,7 @@ export class MemoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-    this.memories = this.memoryService.getMemories().subscribe({
-      next: mem => {
-        this.memories = mem
-        this.filteredMemories = this.memories; 
-      },
-      error: err => this.errorMessage = err
-    }); //memories vullen met data
-
-    
+    this._memories$ = this.memoryService.getMemories$();    
   }
 
 }
