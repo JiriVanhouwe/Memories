@@ -17,8 +17,8 @@ export class MemoryDetailComponent implements OnInit {
   constructor(private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location) { }
 
   ngOnInit(): void {
-    /*this.route.paramMap.subscribe(pa => 
-      this.memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));*/
+    this._route.paramMap.subscribe(pa => 
+      this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
   }
 
   goBack(): void{

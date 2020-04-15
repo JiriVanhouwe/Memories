@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IMemory, Memory } from './memory';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,6 +20,11 @@ export class MemoryService {
     getMemories$() : Observable<Memory[]>{
       return this.http.get<Memory[]>(`${environment.apiUrl}/memories/`)
         .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
+    }
+
+    getMemory$(id : string) : Observable<Memory>{
+      return this.http.get(`${environment.apiUrl}/memories/${id}`).pipe(catchError(this.handleError)
+      , map(Memory.fromJSON));
     }
 
     private handleError(error : HttpErrorResponse){
