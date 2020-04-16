@@ -1,21 +1,53 @@
-<div class="card-body">
-  <div class="row">
-    <div class="col-2">Zoeken:</div>
-    <div class="col-4">
-      <input type="text" [(ngModel)]="listFilter" />
+<div class="container">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-2">Zoeken:</div>
+      <div class="col-4">
+        <input type="text" [(ngModel)]="listFilter" />
+      </div>
+   
     </div>
   </div>
 </div>
 
+<a [routerLink]="['/memories/add']">
+  <i class="fas fa-plus fa-4x"></i>
+</a>
 
+<div class="container">
   <div class="row">
-    <a [routerLink]="['/memories/add']">
-      <i class="fas fa-plus fa-4x"></i>
-    </a>
-    <div class="card-deck">
-      <div *ngIf="memories$ | async as memories">
-        <div *ngIf="memories && memories.length">
-          <div  *ngFor="let memory of memories  | memoryFilter: listFilter">
+    <div *ngIf="memories$ | async as memories">
+      <div *ngIf="memories && memories.length">
+        <div *ngFor="let memory of memories | memoryFilter: listFilter">
+            <div class="card col-lg-3">
+              <div class="card-body">
+                <a [routerLink]="['/memories', memory.memoryId]">
+                  <img class="card-img-top" [src]="memory.imageUrl" [title]="memory.title" alt="{{ memory.title }}"/></a>
+                <h5 class="card-title">{{ memory.title }}</h5>
+                <p class="card-text">{{ memory.subTitle }}</p>
+                <p class="card-footer text-muted">
+                  {{ memory.startDate | date: "dd/MM/yyyy" }} -
+                  {{ memory.endDate | date: "dd/MM/yyyy" }}
+                  <app-location
+                    [country]="memory.location.country"
+                    [city]="memory.location.city"
+                  ></app-location>
+                </p>
+              </div>
+            </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="container">
+  <div class="row">
+    <div *ngIf="memories$ | async as memories">
+      <div *ngIf="memories && memories.length">
+        <div *ngFor="let memory of memories | memoryFilter: listFilter">
+          <div class="col-lg-3">
             <div class="card-header">
               <h5>{{ memory.title }}</h5>
             </div>
@@ -43,6 +75,4 @@
       </div>
     </div>
   </div>
-
-
-
+</div> -->

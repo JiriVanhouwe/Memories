@@ -11,6 +11,7 @@ import { MemoryDetailComponent } from './memories/memory-detail/memory-detail.co
 import { RouterModule, Routes, Router } from '@angular/router';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes : Routes = [
   { path: 'memories', component: MemoryListComponent },
@@ -18,12 +19,12 @@ const routes : Routes = [
   { path: 'memories/add', component: AddMemoryComponent },
   { path: 'home', component: LandingpageComponent},
   { path: '', redirectTo: 'memories', pathMatch: 'full'},
-  { path: '**', redirectTo: 'memories', pathMatch: 'full'}
+  { path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
-    AppComponent, MemoryListComponent, LocationComponent, AddMemoryComponent, MemoryFilterPipe, MemoryDetailComponent, LandingpageComponent, NavbarComponent
+    AppComponent, MemoryListComponent, LocationComponent, AddMemoryComponent, MemoryFilterPipe, MemoryDetailComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent
   ],
   imports: [
     BrowserModule, 

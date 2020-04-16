@@ -9,9 +9,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/memories']">Home</a>
-          </li>  
-          <li class="nav-item">
             <a class="nav-link" [routerLink]="['/memories']">Memories</a>
           </li>
           <li class="nav-item">
@@ -19,7 +16,15 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Uitloggen</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+
+
+  <router-outlet></router-outlet>
+
