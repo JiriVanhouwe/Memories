@@ -3,6 +3,7 @@ import { IMemory, Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-memory-list',
@@ -17,7 +18,7 @@ export class MemoryListComponent implements OnInit {
   
   @Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private memoryService: MemoryService) { 
+  constructor(private memoryService: MemoryService, private _router : Router) { 
     this.filterMemories$.pipe(
       distinctUntilChanged(),
       debounceTime(400),
@@ -41,6 +42,10 @@ export class MemoryListComponent implements OnInit {
   clickMemory(memory: IMemory) : void{
       //toont alle foto's van een memory   
       console.log("Memory openen" + memory.memoryId);
+  }
+
+  clickAddMemory():void{
+    this._router.navigate(['memories/add']);
   }
 
   ngOnInit(): void {  

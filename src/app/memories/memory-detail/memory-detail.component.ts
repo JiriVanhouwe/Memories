@@ -19,10 +19,10 @@ export class MemoryDetailComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe(pa => 
       this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
+      
   }
 
   goBack(): void{
-   // this.router.navigate(['/memories']);
      this._location.back();
   }
 

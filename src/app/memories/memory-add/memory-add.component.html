@@ -1,0 +1,21 @@
+<p>memory-add works!</p>
+
+<mat-card>
+  <mat-card-title>Voeg memory toe</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="memory" (ngSumbit)="onSubmit()">
+      <mat-form-field>
+        <input
+          matInput
+          aria-label="title"
+          placeholder="titel"
+          type="text"
+          formControlName="title"
+        />
+      </mat-form-field>
+      <button type='submit' mat-raised-button>
+        Voeg toe
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
