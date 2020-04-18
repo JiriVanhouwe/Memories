@@ -13,21 +13,23 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MemoryAddComponent } from './memories/memory-add/memory-add.component';
 import { MaterialModule } from './material/material.module';
+import { FriendsComponent } from './friends/friends.component';
 
 
 
 const routes : Routes = [
   { path: 'memories', component: MemoryListComponent },
-  { path: 'memories/:id', component: MemoryDetailComponent },
   { path: 'memories/add', component: MemoryAddComponent },
-  { path: 'home', component: LandingpageComponent},
+  { path: 'memories/home', component: LandingpageComponent},
+  { path: 'memories/friends', component: FriendsComponent},
+  { path: 'memories/:id', component: MemoryDetailComponent }, 
   { path: '', redirectTo: 'memories', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
-    AppComponent, MemoryListComponent, LocationComponent, MemoryFilterPipe, MemoryDetailComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent, MemoryAddComponent
+    AppComponent, MemoryListComponent, LocationComponent, MemoryFilterPipe, MemoryDetailComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent, MemoryAddComponent, FriendsComponent
   ],
   imports: [
     BrowserModule, 

@@ -1,40 +1,48 @@
-<div class="container">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-2">Zoeken:</div>
-      <div class="col-4">
-        <input type="text" [(ngModel)]="listFilter" />
-      </div>
-      <button type="button" class="btn btn-primary" (click)="clickAddMemory()">Voeg memory toe</button>
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Jouw herinneringen</h1>
+      <p class="lead text-muted">
+       Zowel kleine als grootse momenten verzameld </p>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="clickAddMemory()" style="margin-bottom: 10px;">
+            Nieuwe memory
+          </button>
+        </div>
+        <input type="text" [(ngModel)]="listFilter" placeholder="zoeken"/>   
     </div>
-  </div>
-</div>
+  </section>
 
 <div class="container">
     <div *ngIf="memories$ | async as memories">
       <div *ngIf="memories && memories.length">
-        <div *ngFor="let memory of memories | memoryFilter: listFilter">
-          <div class="row justify-content-md-center">
-            <div class="card col-lg-3 ">
-              <div class="card-body">
-                <a [routerLink]="['/memories', memory.memoryId]">
-                  <img class="card-img-top" [src]="memory.imageUrl" [title]="memory.title" alt="{{ memory.title }}"/></a>
-                <h5 class="card-title">{{ memory.title }}</h5>
-                <p class="card-text">{{ memory.subTitle }}</p>
-                <p class="card-footer text-muted">
-                  {{ memory.startDate | date: "dd/MM/yyyy" }} -
-                  {{ memory.endDate | date: "dd/MM/yyyy" }}
-                  <app-location
-                    [country]="memory.location.country"
-                    [city]="memory.location.city"
-                  ></app-location>
-                </p>
-              </div>
-            </div>  
+        <div class="row">
+        <div *ngFor="let memory of memories | memoryFilter: listFilter" class="col-4 d-flex align-items-stretch">
+          <div class="card">
+            <div class="card-body">
+              <a [routerLink]="['/memories', memory.memoryId]">
+                <img
+                  class="card-img-top"
+                  [src]="memory.imageUrl"
+                  [title]="memory.title"
+                  alt="{{ memory.title }}"
+              /></a>
+              <h5 class="card-title">{{ memory.title }}</h5>
+              <p class="card-text">{{ memory.subTitle }}</p>
+              <p class="card-footer text-muted">
+                {{ memory.startDate | date: "dd/MM/yyyy" }} -
+                {{ memory.endDate | date: "dd/MM/yyyy" }}
+                <app-location
+                  [country]="memory.location.country"
+                  [city]="memory.location.city"
+                ></app-location>
+              </p>
+            </div>
+          </div></div>
         </div>
       </div>
     </div>
-  </div>
+
 </div>
 
 <!-- 
