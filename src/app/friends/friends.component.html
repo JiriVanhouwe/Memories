@@ -2,11 +2,15 @@
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Jouw vriendenlijst</h1>
-        <p class="lead text-muted">Voeg vrienden toe om memories met ze te delen
+        <p class="lead text-muted">Voeg vrienden toe om memories met ze te delen, <br>indien ze nog geen account hebben, kan je ze uitnodigen!
         </p>
-          <div><input type="text" placeholder="e-mailadres"/>   
-            <button type="button" class="btn btn-primary" style="margin-left: 5px;">
+          <div class="form-group">
+            <input class="form-control justify-content-center" type="text" placeholder="e-mailadres" style="width: 50%; margin: 0 auto; margin-bottom: 10px;"/>   
+            <button type="button" class="btn btn-primary" style="margin-right: 5px;">
               Voeg een vriend toe
+            </button>
+            <button type="button" class="btn btn-warning">
+              Nodig een vriend uit
             </button>
           </div>
       </div>
@@ -15,9 +19,15 @@
 
     <div class="container d-flex justify-content-center">
     <div class="list-group col-6 ">   
-        <div class="list-group-item list-group-item-action list-group-item-primary">Jiri Vanhouwe</div>
-        <div class="list-group-item list-group-item-action list-group-item-light">Frank Deboosere</div>
-        <div class="list-group-item list-group-item-action list-group-item-primary">Paul Jambers</div>
+        <div class="list-group-item list-group-item-action list-group-item-primary">Jiri Vanhouwe
+          <i class="fas fa-trash-alt pull-right"></i>
+        </div>
+        <div class="list-group-item list-group-item-action list-group-item-light">Frank Deboosere
+          <i class="fas fa-trash-alt pull-right"></i>
+        </div>
+        <div class="list-group-item list-group-item-action list-group-item-primary">Paul Jambers
+          <i class="fas fa-trash-alt pull-right"></i>
+        </div>
       </div>
     </div>
 

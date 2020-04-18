@@ -4,3 +4,13 @@
 @import '~font-awesome/css/font-awesome.min.css';
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 
+
+.jumbotron {
+    background-image: url("assets/background.jpeg");
+    background-size: auto;
+    background-position: 50% 54%;
+  }
+
+h1{
+    color: white;
+  }

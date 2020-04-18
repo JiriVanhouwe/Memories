@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
@@ -13,19 +13,13 @@ import { Subscription, Observable } from 'rxjs';
 export class MemoryEditComponent implements OnInit {
   public memoryForm: FormGroup;
   public memory: Memory;
-  private _sub: Subscription;
+  
+
  
   
   constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService) { }
 
   ngOnInit(): void {
-    //id uit de route halen
-    // this._sub = this._route.paramMap.subscribe(
-    //   params => {
-    //     const id = params.get('id');
-    //     this.getMemory$(id);
-    //   })
-
       this._route.paramMap.subscribe(pa => 
         this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
     
@@ -36,20 +30,32 @@ export class MemoryEditComponent implements OnInit {
       startDate: ['', Validators.required], 
       endDate: ['', Validators.required], 
       country: ['', Validators.required], 
-      city: ['', Validators.required]
+      city: ['', Validators.required],
+      tags: this.fb.array([])
     })
+
+    this.displayData();
   }
 
-  getMemory$(id:string){
+  displayData():void{
+    this.memoryForm.setValue({
+      title: this.memory.title,
+      subTitle: this.memory.subTitle,
+      startDate: this.memory.startDate,
+      endDate: this.memory.endDate,
+      country: this.memory.location.country,
+      city: this.memory.location.city
 
-  }
+    })
 
-  ngOnDestroy():void{
-    this._sub.unsubscribe();
   }
 
   save() : void{
     console.log(this.memoryForm);
+  }
+
+  get tags(): FormArray{
+    return <FormArray>this.memoryForm.get('tags');
   }
 
 
