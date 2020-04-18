@@ -1,21 +1,68 @@
-<p>memory-add works!</p>
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Maak een nieuwe memory</h1>
+      <p class="lead text-muted"></p>
+      <p></p>
+    </div>
+  </section>
+</main>
 
-<mat-card>
-  <mat-card-title>Voeg memory toe</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="memory" (ngSumbit)="onSubmit()">
-      <mat-form-field>
-        <input
-          matInput
-          aria-label="title"
-          placeholder="titel"
-          type="text"
-          formControlName="title"
-        />
-      </mat-form-field>
-      <button type='submit' mat-raised-button>
-        Voeg toe
-      </button>
-    </form>
-  </mat-card-content>
-</mat-card>
+
+<div class="container">
+  <form (ngSumbit)="save()" [formGroup]="memoryForm">
+
+    <div class="form-group">
+      <label for="title">Titel</label>
+      <input id="title" type="text" class="form-control" formControlName="title"/>
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('title')['errors'] && memoryForm.get('title').touched">{{getErrorMessage(memoryForm.get('title')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <div class="form-group">
+      <label for="subTitle">Subtitel</label>
+      <textarea id="subTitle" type="text" class="form-control" formControlName="subTitle" rows="3"></textarea>
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('subTitle')['errors'] && memoryForm.get('subTitle').touched">{{getErrorMessage(memoryForm.get('subTitle')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <div class="form-group">
+      <label for="country">Land</label>
+      <input id="country" type="text" class="form-control" formControlName="country"/>
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('country')['errors'] && memoryForm.get('country').touched">{{getErrorMessage(memoryForm.get('country')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <div class="form-group">
+      <label for="city">Stad</label>
+      <input id="city" type="text" class="form-control" formControlName="city"/>
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('city')['errors'] && memoryForm.get('city').touched">{{getErrorMessage(memoryForm.get('city')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Begin datum</label>
+      <input type="date" id="startDate" class="form-control" formControlName="startDate">
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('startDate')['errors'] && memoryForm.get('startDate').touched">{{getErrorMessage(memoryForm.get('startDate')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">Eind datum</label>
+      <input type="date" id="endDate" class="form-control" formControlName="endDate">
+      <span class="invalid">
+        <span *ngIf="memoryForm.get('endDate')['errors'] && memoryForm.get('endDate').touched">{{getErrorMessage(memoryForm.get('endDate')['errors'])}}</span>
+      </span> 
+    </div>
+
+    <button class="btn btn-primary">Klaar</button>
+
+  </form>
+</div>
+
+

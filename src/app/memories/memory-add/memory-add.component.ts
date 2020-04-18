@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Memory } from '../memory';
 
 @Component({
@@ -9,19 +9,34 @@ import { Memory } from '../memory';
 })
 export class MemoryAddComponent implements OnInit {
   @Output() public newMemory = new EventEmitter<Memory>();
-  public memory: FormGroup;
+  public memoryForm: FormGroup;
+  
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.memory = new FormGroup({
-      title: new FormControl('Parijs')
-    });
+    this.memoryForm = this.fb.group({                   //via formbuilder hoef je niet over FormControls te maken
+      title: ['', Validators.required],                 //key - value
+      subTitle: ['', [Validators.required, Validators.maxLength(50)]], //als je validators toevoegt, zet je het in een array
+      startDate: ['', Validators.required], 
+      endDate: ['', Validators.required], 
+      country: ['', Validators.required], 
+      city: ['', Validators.required]
+    })
   }
 
-  onSubmit():void{
-   // this.newMemory.emit(new Memory(this.memory.value.name));
-
+  save() : void{
+    console.log(this.memoryForm);
   }
 
+  getErrorMessage(errors: any): string {
+    if (!errors) {
+      return null;
+    }
+    if (errors.required) {
+      return 'Dit is een verplicht veld.';
+    } else if (errors.maxLength) {
+      return 'Maximaal vijftig karakters.';
+    } 
+  }
 }
