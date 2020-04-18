@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Memory } from '../memory';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryService } from '../memory.service';
 import { Location } from '@angular/common';
 
@@ -14,7 +14,7 @@ export class MemoryDetailComponent implements OnInit {
 
   public memory: Memory;
 
-  constructor(private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location) { }
+  constructor(private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private _router : Router) { }
 
   ngOnInit(): void {
     this._route.paramMap.subscribe(pa => 
@@ -25,5 +25,6 @@ export class MemoryDetailComponent implements OnInit {
   goBack(): void{
      this._location.back();
   }
+
 
 }

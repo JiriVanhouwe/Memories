@@ -23,8 +23,13 @@ export class MemoryService {
     }
 
     getMemory$(id : string) : Observable<Memory>{
-      return this.http.get(`${environment.apiUrl}/memories/${id}`).pipe(catchError(this.handleError)
-      , map(Memory.fromJSON));
+      const url = `${environment.apiUrl}/memories/${id}`;
+      return this.http.get<Memory>(url).pipe(
+        tap(data => console.log('getMemory: ' + JSON.stringify(data))), catchError(this.handleError)
+      )
+
+      // return this.http.get(`${environment.apiUrl}/memories/${id}`).pipe(catchError(this.handleError)
+      // , map(Memory.fromJSON));
     }
 
     private handleError(error : HttpErrorResponse){

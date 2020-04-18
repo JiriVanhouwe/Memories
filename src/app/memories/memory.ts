@@ -2,7 +2,7 @@ import { ILocation } from './location';
 import { Location } from './location';
 
 export interface IMemory{
-    memoryId: number;
+    id: number;
     title: string;
     subTitle: string;
     startDate: string;
@@ -12,7 +12,7 @@ export interface IMemory{
 }
 
 export class Memory{
-    private _memoryId: number;
+    private _id: number;
     private _location: Location;
 
     constructor(
@@ -29,26 +29,29 @@ export class Memory{
         const mem = new Memory(
             json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), json.imageUrl, Location.fromJSON(json.location)
         );
-        mem._memoryId = json.memoryId;
+        mem._id = json.id;
         return mem;
     }
 
-    get title(){
+    get title(): string{
         return this._title;
     }
-    get subTitle(){
+    get subTitle(): string{
         return this._subTitle;
     }
-    get startDate(){
+    get startDate(): Date{
         return this._startDate;
     }
-    get endDate(){
+    get endDate(): Date{
         return this._endDate;
     }
-    get imageUrl(){
+    get imageUrl(): string{
         return this._imageUrl;
     }
-    get location(){
+    get location(): Location{
         return this._location;
+    }
+    get memoryId() : number{
+        return this._id;
     }
 }

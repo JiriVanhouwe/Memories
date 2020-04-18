@@ -41,7 +41,7 @@ export class MemoryListComponent implements OnInit {
 
   clickMemory(memory: IMemory) : void{
       //toont alle foto's van een memory   
-      console.log("Memory openen" + memory.memoryId);
+      console.log("Memory openen" + memory.id);
   }
 
   clickAddMemory():void{

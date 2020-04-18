@@ -3,12 +3,12 @@
     <div class="container">
       <h1>  {{ memory.title }}</h1>
       <p class="lead text-muted">
-        {{ memory.subTitle }}
+        {{ memory.subTitle }} {{memory.memoryId}}
       </p>
       <p>
         <a href="#" class="btn btn-primary my-2" style="margin-right: 5px;">Foto toevoegen</a>
         <a href="#" class="btn btn-warning my-2" style="margin-right: 5px;">Vrienden toevoegen</a>
-        <a href="#" class="btn btn-info my-2">Bewerk memory</a>
+        <a [routerLink]="['/memories', memory.memoryId, 'edit']" class="btn btn-info my-2">Bewerk memory</a>
       </p>
     </div>
   </section>
