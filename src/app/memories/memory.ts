@@ -9,12 +9,15 @@ export interface IMemory{
     endDate: string;
     imageUrl: string;
     location: ILocation;
+    photos: string[];
 }
 
 export class Memory{
     private _id: number;
     private _location: LocationMemory;
-    private _imageUrl: string;
+    private _imageUrl: string;  //foto voor thumbnail
+    private _photos: string[];
+    //private _friends
 
     constructor(
         private _title: string, 
@@ -23,12 +26,22 @@ export class Memory{
         private _endDate = new Date(),
         location: LocationMemory){
            this._location = location;
+
     }
 
     static fromJSON(json : IMemory): Memory{
         const mem = new Memory(
             json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), LocationMemory.fromJSON(json.location)
         );
+        mem._id = json.id;
+        return mem;
+    }
+
+    static fromJSONwithMembersAndPhotos(json: IMemory): Memory{
+        const mem = new Memory(
+            json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), LocationMemory.fromJSON(json.location)
+        );
+        mem._photos = json.photos;
         mem._id = json.id;
         return mem;
     }
@@ -68,5 +81,8 @@ export class Memory{
     }
     get memoryId() : number{
         return this._id;
+    }
+    get photos(): string[]{
+        return this._photos;
     }
 }

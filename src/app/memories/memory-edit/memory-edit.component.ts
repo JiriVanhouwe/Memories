@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-memory-edit',
@@ -13,8 +15,9 @@ import { Location } from '@angular/common';
 export class MemoryEditComponent implements OnInit {
   public memoryForm: FormGroup;
   public memory: Memory;
+  private _fileToUpload: File = null
   
-  constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location) { }
+  constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private http: HttpClient) { }
 
   ngOnInit(): void {
       this._route.paramMap.subscribe(pa => 
@@ -33,16 +36,20 @@ export class MemoryEditComponent implements OnInit {
     // this.displayData();
   }
 
-  // displayData():void{
-  //   this.memoryForm.setValue({
-  //     title: this.memory.title,
-  //     subTitle: this.memory.subTitle,
-  //     startDate: this.memory.startDate,
-  //     endDate: this.memory.endDate,
-  //     country: this.memory.location.country,
-  //     city: this.memory.location.city
-  //   })
-  // }
+  handleFileInput(file: FileList){
+    this._fileToUpload = file.item(0);
+    console.log("Ja toch");
+    
+  }
+
+  onSubmit(){
+    console.log("komen we hier");
+    this._memoryService.postFile(this.memory, this._fileToUpload).subscribe(
+      data => {
+        console.log('Upload photo done.');
+      } 
+    )
+  }
 
   save() : void{
     console.log("test");

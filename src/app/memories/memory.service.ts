@@ -40,7 +40,7 @@ export class MemoryService {
         catchError(this.handleError),
         map(Memory.fromJSON)
       )
-     
+
       // const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
       // console.log("of hier");
@@ -50,6 +50,17 @@ export class MemoryService {
       // );
       
     }
+
+    //POST PHOTO
+    postFile(memory: Memory, fileToUpload: File){
+      const formData : FormData = new FormData();
+      formData.append('Image', fileToUpload);
+  
+      return this.http.post(`${environment.apiUrl}/memories/${memory.memoryId}`, formData).pipe(
+        tap(d => console.log("Photo werd upgeloaden."))
+      );
+    }
+
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{

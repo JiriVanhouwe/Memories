@@ -10,10 +10,10 @@ export class MemoryFilterPipe implements PipeTransform{
         if(!name || name.length === 0){
             return memories;
         }
-        return memories.filter(mem => mem.title.toLowerCase().startsWith(name.toLowerCase()) 
-            || mem.subTitle.toLowerCase().startsWith(name.toLowerCase())
-            || mem.location.city.toLowerCase().startsWith(name.toLowerCase())
-            || mem.location.country.toLowerCase().startsWith(name.toLowerCase()))
+        return memories.filter(mem => mem.title.toLowerCase().includes(name.toLowerCase()) 
+            || mem.subTitle.toLowerCase().includes(name.toLowerCase())
+            || mem.location.city.toLowerCase().includes(name.toLowerCase())
+            || mem.location.country.toLowerCase().includes(name.toLowerCase()))
             
     }
 
