@@ -21,10 +21,29 @@ export class MemoryDetailComponent implements OnInit {
       this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
       
   }
+  
+  deleteMemory(){
+    if(confirm(`Wil je memory ${this.memory.title} verwijderen?`)){
+      this._memoryService.deleteMemory(this.memory.memoryId).subscribe({
+        next: () => this.deleteCompleted(),
+        error: err => this.getErrorMessage(err)
+    });
+    }
+  }
+
+  deleteCompleted(){
+    this._router.navigate(['/memories']);
+  }
+  
+  getErrorMessage(errors: any): string {
+    if (!errors) {
+      return null;
+    } else{
+      return errors;
+    }
+  }
 
   goBack(): void{
      this._location.back();
   }
-
-
 }

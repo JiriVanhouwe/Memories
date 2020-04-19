@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
-import { Subscription, Observable } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-memory-edit',
@@ -14,10 +14,7 @@ export class MemoryEditComponent implements OnInit {
   public memoryForm: FormGroup;
   public memory: Memory;
   
-
- 
-  
-  constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService) { }
+  constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location) { }
 
   ngOnInit(): void {
       this._route.paramMap.subscribe(pa => 
@@ -30,32 +27,44 @@ export class MemoryEditComponent implements OnInit {
       startDate: ['', Validators.required], 
       endDate: ['', Validators.required], 
       country: ['', Validators.required], 
-      city: ['', Validators.required],
-      tags: this.fb.array([])
+      city: ['', Validators.required]
     })
 
-    this.displayData();
+    // this.displayData();
   }
 
-  displayData():void{
-    this.memoryForm.setValue({
-      title: this.memory.title,
-      subTitle: this.memory.subTitle,
-      startDate: this.memory.startDate,
-      endDate: this.memory.endDate,
-      country: this.memory.location.country,
-      city: this.memory.location.city
-
-    })
-
-  }
+  // displayData():void{
+  //   this.memoryForm.setValue({
+  //     title: this.memory.title,
+  //     subTitle: this.memory.subTitle,
+  //     startDate: this.memory.startDate,
+  //     endDate: this.memory.endDate,
+  //     country: this.memory.location.country,
+  //     city: this.memory.location.city
+  //   })
+  // }
 
   save() : void{
-    console.log(this.memoryForm);
+    console.log("test");
+    if(this.memoryForm.valid){
+      if(this.memoryForm.dirty){ //checken of er iets gewijzigd werd
+        const mem = {...this.memory, ...this.memoryForm.value}; //checkt welke waarden anders zijn
+
+        this._memoryService.updateMemory$(mem).subscribe({
+          next: () => this.saveCompleted(),
+          error: err => this.getErrorMessage(err)
+        })
+      }
+    }
   }
 
-  get tags(): FormArray{
-    return <FormArray>this.memoryForm.get('tags');
+  saveCompleted():void{
+    this.memoryForm.reset(); //anders blijft ie denken dat er nog iets gewijzigd staat
+    //TODO: melding geven dat het gelukt is
+  }
+
+  goBack():void{
+      this._location.back(); 
   }
 
 

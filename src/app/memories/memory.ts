@@ -1,5 +1,5 @@
 import { ILocation } from './location';
-import { Location } from './location';
+import { LocationMemory } from './location';
 
 export interface IMemory{
     id: number;
@@ -13,24 +13,39 @@ export interface IMemory{
 
 export class Memory{
     private _id: number;
-    private _location: Location;
+    private _location: LocationMemory;
+    private _imageUrl: string;
 
     constructor(
         private _title: string, 
         private _subTitle: string, 
         private _startDate = new Date(), 
         private _endDate = new Date(),
-        private _imageUrl: string,
-        location: Location){
+        location: LocationMemory){
            this._location = location;
     }
 
     static fromJSON(json : IMemory): Memory{
         const mem = new Memory(
-            json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), json.imageUrl, Location.fromJSON(json.location)
+            json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), LocationMemory.fromJSON(json.location)
         );
         mem._id = json.id;
         return mem;
+    }
+
+ 
+    toJSON(): IMemory{
+        return <IMemory>{
+            title: this.title,
+            subTitle: this.subTitle,
+            startDate: this.startDate.toString(),
+            endDate: this.endDate.toString(),
+            location: this.location.toJSON()
+        }
+    }
+
+    set imageUrl(value: string){
+        this._imageUrl = value;
     }
 
     get title(): string{
@@ -48,7 +63,7 @@ export class Memory{
     get imageUrl(): string{
         return this._imageUrl;
     }
-    get location(): Location{
+    get location(): LocationMemory{
         return this._location;
     }
     get memoryId() : number{

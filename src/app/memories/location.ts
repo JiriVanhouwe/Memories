@@ -4,7 +4,7 @@ export interface ILocation{
     city: string;
 }
 
-export class Location{
+export class LocationMemory{
     private _locationId: number;
     
 
@@ -12,10 +12,17 @@ export class Location{
 
     }
 
-    static fromJSON(json: ILocation): Location{
-        const loc = new Location(json.country, json.country);
+    static fromJSON(json: ILocation): LocationMemory{
+        const loc = new LocationMemory(json.country, json.country);
         loc._locationId = json.locationId;
         return loc;
+    }
+
+    toJSON() :ILocation{
+        return <ILocation>{
+            country: this.country,
+            city: this.city
+        }
     }
 
     set country(value: string){

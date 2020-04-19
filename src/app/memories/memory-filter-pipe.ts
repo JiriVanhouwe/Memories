@@ -14,6 +14,7 @@ export class MemoryFilterPipe implements PipeTransform{
             || mem.subTitle.toLowerCase().startsWith(name.toLowerCase())
             || mem.location.city.toLowerCase().startsWith(name.toLowerCase())
             || mem.location.country.toLowerCase().startsWith(name.toLowerCase()))
+            
     }
 
 }
