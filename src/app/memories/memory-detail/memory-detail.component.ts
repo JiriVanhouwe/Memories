@@ -22,9 +22,6 @@ export class MemoryDetailComponent implements OnInit {
     this._route.paramMap.subscribe(pa => 
       this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
   }
-
-  
-
   
   deleteMemory(){
     if(confirm(`Wil je memory ${this.memory.title} verwijderen?`)){

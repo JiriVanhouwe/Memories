@@ -40,16 +40,16 @@ export class MemoryAddComponent implements OnInit {
      this.memoryForm.value.startDate, 
      this.memoryForm.value.endDate,
      new LocationMemory(this.memoryForm.value.country, this.memoryForm.value.city)))
-    //  .subscribe({
-    //   next: () => this.saveCompleted(),
-    //   error: err => this.getErrorMessage(err)
-     //});
+     .subscribe({
+      next: () => this.saveCompleted(),
+      error: err => this.getErrorMessage(err)
+     });
   }
 
   saveCompleted(): void{
     this.memoryForm.reset(); 
-    console.log("komen we in savecompleted?")
-    //TODO: melding geven dat het gelukt is
+    console.log("komen we in save completed?")
+    this.goBack();
   }
 
   goBack():void{

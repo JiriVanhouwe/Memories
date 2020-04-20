@@ -33,7 +33,19 @@ export class MemoryEditComponent implements OnInit {
       city: ['', Validators.required]
     })
 
-    // this.displayData();
+     this.displayData();
+  }
+
+  displayData():void{
+    let data = {
+      title: this.memory.title,
+      subTitle: this.memory.subTitle,
+      startDate: this.memory.startDate,
+      endDate: this.memory.endDate,
+      country: this.memory.location.country,
+      city: this.memory.location.city
+    }
+    this.memoryForm.setValue(data);
   }
 
   handleFileInput(file: FileList){
@@ -52,7 +64,6 @@ export class MemoryEditComponent implements OnInit {
   }
 
   save() : void{
-    console.log("test");
     if(this.memoryForm.valid){
       if(this.memoryForm.dirty){ //checken of er iets gewijzigd werd
         const mem = {...this.memory, ...this.memoryForm.value}; //checkt welke waarden anders zijn
@@ -66,8 +77,8 @@ export class MemoryEditComponent implements OnInit {
   }
 
   saveCompleted():void{
-    this.memoryForm.reset(); //anders blijft ie denken dat er nog iets gewijzigd staat
-    //TODO: melding geven dat het gelukt is
+    this.memoryForm.reset(); 
+    this.goBack();
   }
 
   goBack():void{
