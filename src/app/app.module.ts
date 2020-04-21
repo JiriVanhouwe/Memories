@@ -21,8 +21,8 @@ import { MemoryEditComponent } from './memories/memory-edit/memory-edit.componen
 const routes : Routes = [
   { path: 'memories', component: MemoryListComponent },
   { path: 'memories/add', component: MemoryAddComponent },
-  { path: 'memories/home', component: LandingpageComponent},
-  { path: 'memories/friends', component: FriendsComponent},
+  { path: 'home', component: LandingpageComponent},
+  { path: 'friends/:id', component: FriendsComponent},
   { path: 'memories/:id', component: MemoryDetailComponent }, 
   { path: 'memories/:id/edit', component: MemoryEditComponent},
   { path: '', redirectTo: 'memories', pathMatch: 'full'},

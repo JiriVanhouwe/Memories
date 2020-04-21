@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Friend, IFriend } from '../friends/friend';
 
 @Injectable({
     providedIn: 'root'
@@ -18,13 +19,13 @@ export class MemoryService {
   }
 
 
-    //GET ALL
+    //GET ALL MEMORIES
     getMemories$() : Observable<Memory[]>{
       return this.http.get<Memory[]>(`${environment.apiUrl}/memories/`)
         .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
     }
 
-    //GET BY ID
+    //GET MEMORY BY ID
     getMemory$(id : string) : Observable<Memory>{
       const url = `${environment.apiUrl}/memories/${id}`;
       return this.http.get<Memory>(url).pipe(
@@ -39,16 +40,7 @@ export class MemoryService {
         tap(data => console.log('Post new memory: ' +JSON.stringify(memory))),
         catchError(this.handleError),
         map(Memory.fromJSON)
-      )
-
-      // const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-      // console.log("of hier");
-      // return this.http.post<Memory>(`${environment.apiUrl}/memories`, memory, {headers: headers}).pipe(
-      //   tap(data => console.log('Post new memory: ' + JSON.stringify(memory))), 
-      //   catchError(this.handleError), 
-      // );
-      
+      )      
     }
 
     //POST PHOTO
@@ -60,7 +52,6 @@ export class MemoryService {
         tap(d => console.log("Photo werd upgeloaden."))
       );
     }
-
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
@@ -79,6 +70,14 @@ export class MemoryService {
       return this.http
       .delete(`${environment.apiUrl}/memories/${id}`)
       .pipe(tap(data => console.log(`Memory met id ${id} werd verwijderd.`)), catchError(this.handleError))
+    }
+
+    //GET ALL FRIENDS
+    getFriends$(id: number): Observable<Friend>{
+      const url = `${environment.apiUrl}/friends/${id}`;
+      return this.http.get<Friend>(url).pipe(
+        tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
+      )
     }
 
     handleError(err: any): Observable<never> {
