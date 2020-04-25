@@ -15,6 +15,8 @@ import { MemoryAddComponent } from './memories/memory-add/memory-add.component';
 import { MaterialModule } from './material/material.module';
 import { FriendsComponent } from './friends/friends.component';
 import { MemoryEditComponent } from './memories/memory-edit/memory-edit.component';
+import { MemoryResolver } from './memories/MemoryResolver';
+import { FriendResolver } from './friends/friend-resolver';
 
 
 
@@ -22,9 +24,9 @@ const routes : Routes = [
   { path: 'memories', component: MemoryListComponent },
   { path: 'memories/add', component: MemoryAddComponent },
   { path: 'home', component: LandingpageComponent},
-  { path: 'friends/:id', component: FriendsComponent},
-  { path: 'memories/:id', component: MemoryDetailComponent }, 
-  { path: 'memories/:id/edit', component: MemoryEditComponent},
+  { path: 'friends/:id', component: FriendsComponent, resolve : {friend: FriendResolver}},
+  { path: 'memories/:id', component: MemoryDetailComponent, resolve:{ memory: MemoryResolver} }, 
+  { path: 'memories/:id/edit', component: MemoryEditComponent, resolve:{memory: MemoryResolver}},
   { path: '', redirectTo: 'memories', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ]

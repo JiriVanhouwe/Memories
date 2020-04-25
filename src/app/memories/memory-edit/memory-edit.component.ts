@@ -5,7 +5,6 @@ import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-memory-edit',
@@ -20,8 +19,10 @@ export class MemoryEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private http: HttpClient) { }
 
   ngOnInit(): void {
-      this._route.paramMap.subscribe(pa => 
-        this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
+     this._route.data.subscribe(item => 
+      {
+        this.memory = item['memory'];
+      }); 
     
   
     this.memoryForm = this.fb.group({                  
@@ -33,15 +34,16 @@ export class MemoryEditComponent implements OnInit {
       city: ['', Validators.required]
     })
 
-     this.displayData();
+    this.displayData();
+    
   }
 
   displayData():void{
     let data = {
       title: this.memory.title,
       subTitle: this.memory.subTitle,
-      startDate: this.memory.startDate,
-      endDate: this.memory.endDate,
+      startDate: this.memory.startDate.substring(0,10),
+      endDate: this.memory.endDate.substring(0,10),
       country: this.memory.location.country,
       city: this.memory.location.city
     }
@@ -92,7 +94,7 @@ export class MemoryEditComponent implements OnInit {
     }
     if (errors.required) {
       return 'Dit is een verplicht veld.';
-    } else if (errors.maxLength) {
+    } else if (errors.maxlength) {
       return 'Maximaal vijftig karakters.';
     } 
   }

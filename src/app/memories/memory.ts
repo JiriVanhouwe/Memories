@@ -68,11 +68,11 @@ export class Memory{
     get subTitle(): string{
         return this._subTitle;
     }
-    get startDate(): Date{
-        return this._startDate;
+    get startDate(): string{
+        return this._startDate.toISOString();
     }
-    get endDate(): Date{
-        return this._endDate;
+    get endDate(): string{
+        return this._endDate.toISOString();
     }
     get imageUrl(): string{
         return this._imageUrl;

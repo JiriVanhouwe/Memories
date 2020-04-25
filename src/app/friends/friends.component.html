@@ -36,7 +36,7 @@
         style="margin-bottom: 3px;"
       >
         {{ friend.firstName }} {{ friend.lastName }}
-        <i class="fas fa-trash-alt pull-right"></i>
+        <i class="fas fa-trash-alt pull-right" (click)="deleteFriend(friend.email)" style="cursor: pointer;"></i>
       </div>
     </div>
   </div>

@@ -19,8 +19,7 @@ export class MemoryDetailComponent implements OnInit {
   constructor(private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private _router : Router) { }
 
   ngOnInit(): void {
-    this._route.paramMap.subscribe(pa => 
-      this._memoryService.getMemory$(pa.get('id')).subscribe(item => (this.memory = item)));
+    this._route.data.subscribe(item => this.memory = item['memory']); //via de resolver wordt eerst de memory geladen en dan getoond.
   }
   
   deleteMemory(){
