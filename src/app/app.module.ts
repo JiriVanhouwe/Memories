@@ -18,10 +18,12 @@ import { MemoryEditComponent } from './memories/memory-edit/memory-edit.componen
 import { MemoryResolver } from './memories/MemoryResolver';
 import { FriendResolver } from './friends/friend-resolver';
 import { UserModule } from './user/user.module';
+import { httpInterceptorProviders } from './interceptor/providers';
 
 
 
 const routes : Routes = [
+  {},
   { path: 'memories', component: MemoryListComponent },
   { path: 'memories/add', component: MemoryAddComponent },
   { path: 'home', component: LandingpageComponent},
@@ -36,16 +38,17 @@ const routes : Routes = [
   declarations: [  //hier komen componenten die tot de module behoren
     AppComponent, MemoryListComponent, LocationComponent, MemoryFilterPipe, MemoryDetailComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent, MemoryAddComponent, FriendsComponent, MemoryEditComponent
   ],
-  imports: [
+  imports: [ //hier is de volgorde belangrijk
     BrowserModule, 
-    FormsModule,
+    MaterialModule,
     HttpClientModule,
+    UserModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    MaterialModule,
-    UserModule
+    
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent] //de startcomponent van onze applicatie
 })
 

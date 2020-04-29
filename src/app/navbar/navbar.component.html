@@ -14,11 +14,19 @@
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/friends/1']">Vrienden</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Uitloggen</a>
+            <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
+              {{user}}
+            <a class="nav-link" (click)="logout()">Uitloggen</a>
+          </span>
+
+          <ng-template #loginTemplate>
+            <span>
+              <button (click)="login()">Login</button>
+            </span>
+          </ng-template>
+
           </li>
         </ul>
       </div>

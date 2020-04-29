@@ -1,0 +1,90 @@
+<div class="container">
+    <h4>Registreer</h4>
+    <form [formGroup]="user" (ngSubmit)="onSubmit()">
+
+        <div class="formGroup">
+            <input
+            style="margin-bottom: 5px; max-width:300px;"
+                class="form-control"
+                placeholder="voornaam"
+                formControlName="firstname">
+                <span
+                *ngIf="user.get('firstname').errors && user.get('firstname').touched">
+                {{ getErrorMessage(user.get('firstname').errors) }}
+        </span>
+          </div>
+
+          <div class="formGroup">
+            <input
+            style="margin-bottom: 5px; max-width:300px;"
+            class="form-control"
+            placeholder="familienaam"
+            formControlName="lastname">
+            <span
+            *ngIf="user.get('lastname').errors && user.get('lastname').touched">
+            {{ getErrorMessage(user.get('lastname').errors) }}
+          </span>
+          </div>
+
+          <div class="formGroup">
+            <input
+            style="margin-bottom: 5px; max-width:300px;"
+            class="form-control"
+            placeholder="e-mail"
+            formControlName="email">
+            <span *ngIf="user.get('email').errors && user.get('email').touched">
+              {{ getErrorMessage(user.get('email').errors) }}
+          </span>
+          </div>
+
+          <span formGroupName="passwordGroup">
+          <div class="formGroup">
+            <input
+            style="margin-bottom: 5px; max-width:300px;"
+            class="form-control"
+            type="password"
+            placeholder="wachtwoord"
+            formControlName="password"/>
+          <span
+          *ngIf="user.get('passwordGroup').get('password').errors && user.get('passwordGroup').get('password').touched">
+          {{
+            getErrorMessage(
+              user.get('passwordGroup').get('password').errors)
+          }}
+        </span>
+          </div>
+
+          <div class="formGroup">
+            <input
+            style="margin-bottom: 5px; max-width:300px;"
+            class="form-control"
+                type="password"
+                placeholder="bevestig wachtwoord"
+                formControlName="confirmPassword"
+              />
+              <span
+                *ngIf="user.get('passwordGroup').get('confirmPassword').errors && user.get('passwordGroup').get('confirmPassword').touched">
+                {{
+                  getErrorMessage(
+                    user.get('passwordGroup').get('confirmPassword').errors)
+                }}
+            </span>
+          </div>
+          <span
+              *ngIf="
+                user.get('passwordGroup').errors &&
+                user.get('passwordGroup').get('confirmPassword').touched &&
+                user.get('passwordGroup').get('password').touched">
+              {{ getErrorMessage(user.get('passwordGroup').errors) }}
+        </span>
+        </span>
+
+        <button style="margin-right:10px;" type="submit" class="btn btn-outline-primary"> Registreer </button>
+        <button class="btn btn-outline-secondary" [routerLink]="['/login']">Login</button>
+          
+    </form>
+
+    <div class="error" *ngIf="errorMessage">
+        Er ging iets fout: {{ errorMessage }}
+      </div>
+</div>
