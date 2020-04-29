@@ -122,9 +122,14 @@
       </span>
     </div>
 
-    <div style="margin-bottom: 15px">
-      <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)"/>
-      <button type="submit" class="btn btn-primary" (ngSubmit)="onSubmit()">Upload</button>
+    <div class="form-group">
+      <label for="file">Foto</label>
+      <input
+        formControlName="file"
+        id="file"
+        type="file"
+        class="form-control"
+        (change)="onFileChange($event)" multiple>
     </div>
 
     <div>

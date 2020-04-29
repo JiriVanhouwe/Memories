@@ -9,7 +9,7 @@ export interface IMemory{
     endDate: string;
     imageUrl: string;
     location: ILocation;
-    photos: string[];
+    photos: [];
     friends: string[];
 }
 
@@ -17,7 +17,7 @@ export class Memory{
     private _id: number;
     private _location: LocationMemory;
     private _imageUrl: string;  //foto voor thumbnail
-    private _photos: string[];
+    private _photos: [];
     private _friends
 
     constructor(
@@ -68,11 +68,17 @@ export class Memory{
     get subTitle(): string{
         return this._subTitle;
     }
-    get startDate(): string{
+    get startDate(): Date{
+        return this._startDate;
+    }
+    get startDateAsString(): string{
         return this._startDate.toISOString();
     }
-    get endDate(): string{
+    get endDateAsString(): string{
         return this._endDate.toISOString();
+    }
+    get endDate(): Date{
+        return this._endDate;
     }
     get imageUrl(): string{
         return this._imageUrl;

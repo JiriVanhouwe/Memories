@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FriendsComponent implements OnInit {
   public _userWithFriends: Friend;
+  private _emailInput: string; 
 
   constructor(private _memoryService: MemoryService,private _route: ActivatedRoute) {
     
@@ -25,8 +26,18 @@ export class FriendsComponent implements OnInit {
   }
 }
 
+  inviteFriend(): void{
+    if(this._emailInput != null){
+      this._memoryService.inviteNewUser(this._emailInput).subscribe(data => console.log(data));
+    }
+}
+
   get friends$(){
     return this._userWithFriends;
+  }
+
+  set emailInput(value:string){
+    this._emailInput = value;
   }
 
 }

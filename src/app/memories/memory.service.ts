@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IMemory, Memory } from './memory';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -55,6 +55,7 @@ export class MemoryService {
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
+      console.log(JSON.stringify(memory))
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
       const url = `${environment.apiUrl}/memories/${memory.memoryId}`;
 
@@ -78,6 +79,16 @@ export class MemoryService {
       return this.http.get<Friend>(url).pipe(
         tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
       )
+    }
+
+    //INVITE NEW USER
+    inviteNewUser(email: string): Observable<Object>{
+      const url = `${environment.apiUrl}/friends/`;
+      let param = new HttpParams().set("email", email);
+
+      return this.http.get(url, {params: param}).pipe(
+        tap(data => console.log('Resultaat: ', data)), catchError(this.handleError)
+      );
     }
 
     handleError(err: any): Observable<never> {

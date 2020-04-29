@@ -17,6 +17,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { MemoryEditComponent } from './memories/memory-edit/memory-edit.component';
 import { MemoryResolver } from './memories/MemoryResolver';
 import { FriendResolver } from './friends/friend-resolver';
+import { UserModule } from './user/user.module';
 
 
 
@@ -41,7 +42,8 @@ const routes : Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent] //de startcomponent van onze applicatie

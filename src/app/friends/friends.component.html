@@ -12,6 +12,7 @@
           type="text"
           placeholder="e-mailadres"
           style="width: 50%; margin: 0 auto; margin-bottom: 10px;"
+          [(ngModel)]="emailInput"
         />
         <button
           type="button"
@@ -20,7 +21,7 @@
         >
           Voeg een vriend toe
         </button>
-        <button type="button" class="btn btn-warning">
+        <button type="button" class="btn btn-warning" (click)="inviteFriend()">
           Nodig een vriend uit
         </button>
       </div>
