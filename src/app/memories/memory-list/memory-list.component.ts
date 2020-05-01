@@ -2,8 +2,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { IMemory, Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-memory-list',
@@ -49,7 +50,7 @@ export class MemoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-    this._memories$ = this.memoryService.getMemories$();    
+    this._memories$ = this.memoryService.getMemories$();   
   }
 
 }

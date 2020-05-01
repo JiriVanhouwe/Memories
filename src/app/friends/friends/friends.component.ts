@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MemoryService } from '../memories/memory.service';
-import { Observable } from 'rxjs';
-import { Friend } from './friend';
+import { MemoryService } from '../../memories/memory.service';
+import { Friend } from '../friend';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FriendsComponent implements OnInit {
   public _userWithFriends: Friend;
-  private _emailInput: string; 
+   _emailInput: string; 
 
   constructor(private _memoryService: MemoryService,private _route: ActivatedRoute) {
     
@@ -30,6 +29,7 @@ export class FriendsComponent implements OnInit {
     if(this._emailInput != null){
       this._memoryService.inviteNewUser(this._emailInput).subscribe(data => console.log(data));
     }
+    
 }
 
   get friends$(){
