@@ -4,6 +4,8 @@ import { MemoryService } from '../memory.service';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/user/authentication.service';
+import { Friend } from 'src/app/friends/friend';
 
 
 @Component({

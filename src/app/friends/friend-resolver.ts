@@ -14,7 +14,7 @@ export class FriendResolver implements Resolve<Friend>{//zodat bij het renderen 
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Friend> {
-       return  this.memoryService.getFriends$(route.params['id']);
+       return  this.memoryService.getFriends$();
     }
 
 }

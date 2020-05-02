@@ -1,32 +1,36 @@
-<div class="container">
-  <h4>Login</h4>
-  <form [formGroup]="user" (ngSubmit)="onSubmit()">
 
-    <div class="formGroup">
-      <input
-      style="max-width:300px; margin-bottom:5px;"
-      class="form-control"
-      placeholder="e-mail"
-      formControlName="username"/>
-    </div>
+        <div class="container">
+          <h4>Login</h4>
+          <form [formGroup]="user" (ngSubmit)="onSubmit()">
+        
+            <div class="formGroup">
+              <input
+              style="max-width:300px; margin-bottom:5px;"
+              class="form-control"
+              placeholder="e-mail"
+              formControlName="username"/>
+            </div>
+        
+            <div class="formGroup">
+              <input
+                 style="max-width:300px"
+                 class="form-control"
+                  type="password"
+                  placeholder="wachtwoord"
+                  formControlName="password"/>
+            </div>
+        
+            <div style="margin-top:10px">
+              <button class="btn btn-outline-primary" type="submit" style="margin-right:10px">Login</button>
+              <button class="btn btn-outline-secondary" [routerLink]="['/register']">Registreer</button>
+           </div>
+        
+          </form>
+        
+          <div class="error" *ngIf="errorMessage">
+            Er ging iets fout: {{ errorMessage }}
+          </div>
+        </div>
 
-    <div class="formGroup">
-      <input
-         style="max-width:300px"
-         class="form-control"
-          type="password"
-          placeholder="wachtwoord"
-          formControlName="password"/>
-    </div>
 
-    <div style="margin-top:10px">
-      <button class="btn btn-outline-primary" type="submit" style="margin-right:10px">Login</button>
-      <button class="btn btn-outline-secondary" [routerLink]="['/register']">Registreer</button>
-   </div>
 
-  </form>
-
-  <div class="error" *ngIf="errorMessage">
-    Er ging iets fout: {{ errorMessage }}
-  </div>
-</div>

@@ -5,19 +5,16 @@ import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Friend, IFriend } from '../friends/friend';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MemoryService {
-  private _memories : Memory[];
-  private _memories$ = new BehaviorSubject<Memory[]>([]);
 
   constructor(private http: HttpClient){
-      this.getMemories$().subscribe(rec => this._memories = rec);
-      this._memories$.next(this._memories);
-  }
 
+  }
 
     //GET ALL MEMORIES
     getMemories$() : Observable<Memory[]>{
@@ -74,8 +71,8 @@ export class MemoryService {
     }
 
     //GET ALL FRIENDS
-    getFriends$(id: number): Observable<Friend>{
-      const url = `${environment.apiUrl}/friends/${id}`;
+    getFriends$(): Observable<Friend>{
+      const url = `${environment.apiUrl}/friends/`;
       return this.http.get<Friend>(url).pipe(
         tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
       )
@@ -83,7 +80,7 @@ export class MemoryService {
 
     //INVITE NEW USER
     inviteNewUser(email: string): Observable<Object>{
-      const url = `${environment.apiUrl}/friends/`;
+      const url = `${environment.apiUrl}/friends/${email}`;
       let param = new HttpParams().set("email", email);
 
       return this.http.get(url, {params: param}).pipe(

@@ -62,6 +62,10 @@ export class Memory{
         this._imageUrl = value;
     }
 
+    get id(): number{
+        return this._id;
+    }
+
     get title(): string{
         return this._title;
     }

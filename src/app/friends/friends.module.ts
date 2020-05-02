@@ -7,7 +7,7 @@ import { FriendResolver } from './friend-resolver';
 import { FriendsComponent } from './friends/friends.component';
 
 const routes : Routes = [
-  { path: 'friends/:id', component: FriendsComponent, resolve : {friend: FriendResolver}}
+  { path: 'friends', component: FriendsComponent, resolve : {friend: FriendResolver}}
 ]
 
 @NgModule({

@@ -24,7 +24,7 @@
         <div *ngFor="let memory of memories | memoryFilter: listFilter" class="col-4 d-flex align-items-stretch">
           <div class="card mb-3">
             <div class="card-body">
-              <a [routerLink]="['/memories', memory.memoryId]">
+              <a [routerLink]="['/memories', memory.id]">
                 <img
                   class="card-img-top"
                   [src]="memory.imageUrl"
@@ -48,39 +48,3 @@
     </div>
 
 </div>
-
-<!-- 
-<div class="container">
-  <div class="row">
-    <div *ngIf="memories$ | async as memories">
-      <div *ngIf="memories && memories.length">
-        <div *ngFor="let memory of memories | memoryFilter: listFilter">
-          <div class="col-lg-3">
-            <div class="card-header">
-              <h5>{{ memory.title }}</h5>
-            </div>
-            <a [routerLink]="['/memories', memory.memoryId]">
-              <img
-                class="card-img-top"
-                [src]="memory.imageUrl"
-                [title]="memory.title"
-                alt="{{ memory.title }}"
-              />
-            </a>
-            <div class="card-body">
-              <p class="card-text">{{ memory.subTitle }}</p>
-            </div>
-            <div class="card-footer text-muted">
-              {{ memory.startDate | date: "dd/MM/yyyy" }} -
-              {{ memory.endDate | date: "dd/MM/yyyy" }}
-              <app-location
-                [country]="memory.location.country"
-                [city]="memory.location.city"
-              ></app-location>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

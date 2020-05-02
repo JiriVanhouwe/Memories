@@ -43,7 +43,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (val) => {
           if (val) { //als de login gelukt is
+            if(this.authService.redirectUrl){
+              this.router.navigateByUrl(this.authService.redirectUrl);
+              this.authService.redirectUrl = '';
+            }else {
             this.router.navigate(["/memories"]);
+            }
           } else {
             this.errorMessage = `Login mislukt`;
           }
