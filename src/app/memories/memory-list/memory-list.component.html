@@ -27,7 +27,7 @@
               <a [routerLink]="['/memories', memory.id]">
                 <img
                   class="card-img-top"
-                  [src]="memory.imageUrl"
+                  [src]="'data:image/jpg;base64,'+memory.photo.baseString"
                   [title]="memory.title"
                   alt="{{ memory.title }}"
               /></a>

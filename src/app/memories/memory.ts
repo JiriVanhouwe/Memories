@@ -21,6 +21,8 @@ export class Memory{
     private _photos: [];
     private _friends: Friend[];
 
+    private _photosToDataUrl: [];
+
     constructor(
         private _title: string, 
         private _subTitle: string, 
@@ -47,6 +49,14 @@ export class Memory{
         mem._photos = json.photos;
         mem._id = json.id;
         return mem;
+    }
+
+    toDataUrl(){
+        for(var item in this._photos){
+            this._photosToDataUrl.push()
+        }
+
+
     }
 
  
