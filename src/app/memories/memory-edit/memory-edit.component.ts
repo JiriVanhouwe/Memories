@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class MemoryEditComponent implements OnInit {
   public memoryForm: FormGroup;
   public memory: Memory;
-  public images = [];
+
   
   constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private http: HttpClient) { }
 
@@ -31,8 +31,7 @@ export class MemoryEditComponent implements OnInit {
       startDate: ['', Validators.required], 
       endDate: ['', Validators.required], 
       country: ['', Validators.required], 
-      city: ['', Validators.required],
-      file: ['']
+      city: ['', Validators.required]
     })
 
     this.displayData();
@@ -48,28 +47,10 @@ export class MemoryEditComponent implements OnInit {
       endDate: this.memory.endDate,
       country: this.memory.location.country,
       city: this.memory.location.city,
-      file: null
     }
     this.memoryForm.patchValue(data); //de datums worden nog niet weergegeven
   }
 
-
-  onFileChange(event){
-    if (event.target.files && event.target.files[0]) {
-      var filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-              var reader = new FileReader();
- 
-              reader.onload = (event:any) => {
-                console.log(event.target.result);
-                 this.images.push(event.target.result); 
-              }
-
-              reader.readAsDataURL(event.target.files[i]);
-      }
-  }
-      
-  }
 
 
   save() : void{
@@ -91,8 +72,8 @@ export class MemoryEditComponent implements OnInit {
   }
 
   goBack():void{
-
       this._location.back(); 
+      
   }
 
 

@@ -1,0 +1,15 @@
+#label-photo {
+    cursor: pointer;
+    background-color: #0069D9;
+    border-radius: 4px;
+    padding: 6px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+
+#file {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}

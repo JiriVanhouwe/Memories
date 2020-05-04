@@ -1,5 +1,6 @@
 import { ILocation } from './location';
 import { LocationMemory } from './location';
+import { Friend } from '../friends/friend';
 
 export interface IMemory{
     id: number;
@@ -10,7 +11,7 @@ export interface IMemory{
     imageUrl: string;
     location: ILocation;
     photos: [];
-    friends: string[];
+    friends: Friend[];
 }
 
 export class Memory{
@@ -18,7 +19,7 @@ export class Memory{
     private _location: LocationMemory;
     private _imageUrl: string;  //foto voor thumbnail
     private _photos: [];
-    private _friends
+    private _friends: Friend[];
 
     constructor(
         private _title: string, 
@@ -26,7 +27,7 @@ export class Memory{
         private _startDate = new Date(), 
         private _endDate = new Date(),
         location: LocationMemory){
-           this._location = location;
+           this._location = location; 
 
     }
 
@@ -43,6 +44,7 @@ export class Memory{
             json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), LocationMemory.fromJSON(json.location)
         );
         mem._friends = json.friends;
+        mem._photos = json.photos;
         mem._id = json.id;
         return mem;
     }
@@ -57,6 +59,12 @@ export class Memory{
             location: this.location.toJSON()
         }
     }
+
+
+    addFriend(friend: Friend){
+        if(friend != null)
+         this._friends.push(friend);
+ }
 
     set imageUrl(value: string){
         this._imageUrl = value;
@@ -90,13 +98,11 @@ export class Memory{
     get location(): LocationMemory{
         return this._location;
     }
-    get memoryId() : number{
-        return this._id;
-    }
+
     get photos(): string[]{
         return this._photos;
     }
-    get friends(): string[]{
+    get friends(): Friend[]{
         return this._friends;
     }
 }

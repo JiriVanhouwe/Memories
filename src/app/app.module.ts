@@ -17,7 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [  //hier komen componenten die tot de module behoren
-    AppComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent
+    AppComponent, LandingpageComponent, NavbarComponent, PageNotFoundComponent 
   ],
   imports: [ //hier is de volgorde belangrijk
     BrowserModule, 

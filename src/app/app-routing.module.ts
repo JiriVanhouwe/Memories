@@ -15,7 +15,7 @@ const routes: Routes = [
     data: { preload: true },
   },
   { path: 'home', component: LandingpageComponent},
-  { path: '', redirectTo: 'memories', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];
 

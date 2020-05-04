@@ -41,23 +41,25 @@ export class MemoryService {
     }
 
     //POST PHOTO
-    postFile(memory: Memory, fileToUpload: File){
-      const formData : FormData = new FormData();
-      formData.append('Image', fileToUpload);
-  
-      return this.http.post(`${environment.apiUrl}/memories/${memory.memoryId}`, formData).pipe(
-        tap(d => console.log("Photo werd upgeloaden."))
-      );
+    addPhoto$(photos: File, id: number){
+     const fd = new FormData();
+     fd.append('image', photos, photos.name)
+     console.log("service fd " + fd);
+
+     return this.http.post(`${environment.apiUrl}/memories/${id}`, fd)
+     .subscribe(res => {
+       console.log(res);
+     });
     }
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
-      console.log(JSON.stringify(memory))
+     // console.log(JSON.stringify(memory))
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
-      const url = `${environment.apiUrl}/memories/${memory.memoryId}`;
+      const url = `${environment.apiUrl}/memories/${memory.id}`;
 
       return this.http.put<Memory>(url, memory, {headers: headers}).pipe(
-        tap(() => console.log('Update memory: ' + memory.memoryId)),
+        tap(() => console.log('Update memory: ' + memory.id)),
         map(() => memory),
         catchError(this.handleError)
       );
@@ -70,6 +72,8 @@ export class MemoryService {
       .pipe(tap(data => console.log(`Memory met id ${id} werd verwijderd.`)), catchError(this.handleError))
     }
 
+
+    //friends page
     //GET ALL FRIENDS
     getFriends$(): Observable<Friend>{
       const url = `${environment.apiUrl}/friends/`;
@@ -86,6 +90,27 @@ export class MemoryService {
       return this.http.get(url, {params: param}).pipe(
         tap(data => console.log('Resultaat: ', data)), catchError(this.handleError)
       );
+    }
+
+    //DELETE A FRIEND
+    deleteFriend(email: string): Observable<{}>{
+      let param = new HttpParams().set("email", email);
+      const url = `${environment.apiUrl}/friends/`;
+
+      return this.http
+      .delete(url, {params: param})
+      .pipe(tap(data => console.log(`Vriend ${email} werd verwijderd.`)), catchError(this.handleError))
+    }
+
+    //ADD A FRIEND
+    addFriend(email: string): Observable<Object>{
+      let param = new HttpParams().set("email", email);
+      console.log("param " + param);
+      const url = `${environment.apiUrl}/friends/`;
+
+      return this.http
+      .put<string>(url, {}, {params: param})
+      .pipe(catchError(this.handleError))      
     }
 
     handleError(err: any): Observable<never> {

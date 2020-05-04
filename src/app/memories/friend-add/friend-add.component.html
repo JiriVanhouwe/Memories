@@ -1,0 +1,22 @@
+<main role="main">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Voeg vrienden toe</h1>
+        <p class="lead text-muted">{{ memory.title }}</p>
+      </div>
+    </section>
+  </main>
+
+  <div *ngFor="let friend of _userWithFriends.friends">
+    <div class="container d-flex justify-content-center">
+      <div class="list-group col-6">
+        <div
+          class="list-group-item list-group-item-action list-group-item-light"
+          style="margin-bottom: 3px;"
+        >
+          {{ friend.firstName }} {{ friend.lastName }}
+          <i class="fas fa-plus pull-right" style="cursor: pointer;" (click)="addFriendToMemory(friend)"></i>
+        </div>
+      </div>
+    </div>
+  </div> 
