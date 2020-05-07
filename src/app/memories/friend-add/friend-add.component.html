@@ -6,6 +6,8 @@
       </div>
     </section>
   </main>
+  
+  <div class="alert alert-success " *ngIf="message">{{message}</div>
 
   <div *ngFor="let friend of _userWithFriends.friends">
     <div class="container d-flex justify-content-center">

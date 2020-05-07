@@ -24,10 +24,10 @@ export class FriendAddComponent implements OnInit {
 
   addFriendToMemory(friend: Friend){
     console.log(friend.email);
-    console.log("mem" + this.memory.subTitle);
+    console.log("mem: " + this.memory.subTitle);
    
     //todo omzetten naar een memory ipv opject.
-    // this.memory.addFriend(friend);
+     this.memory.addFriend(friend);
     this._memoryService.updateMemory$(this.memory).subscribe({
       next: () => this.message = `${friend.email} werd toegevoegd`,
       error: err => this.getErrorMessage(err)

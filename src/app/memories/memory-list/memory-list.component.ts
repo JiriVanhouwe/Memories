@@ -42,10 +42,18 @@ export class MemoryListComponent implements OnInit {
     this._listFilter = value;
     }
 
-  clickMemory(memory: IMemory) : void{
-      //toont alle foto's van een memory   
-      console.log("Memory openen" + memory.id);
-  }
+    deleteMemory(id:number){
+      if(confirm(`Wil je deze memory verwijderen?`)){
+        this.memoryService.deleteMemory(id).subscribe({
+          next: () => this.deleteCompleted(),
+          error: err => console.log(err)
+      });
+      }
+    }
+
+    deleteCompleted(){
+      this._router.navigate(['/memories']);
+    }
 
   clickAddMemory():void{
     this._router.navigate(['memories/add']);

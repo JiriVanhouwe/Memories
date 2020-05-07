@@ -6,6 +6,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Friend, IFriend } from '../friends/friend';
 import { AuthenticationService } from '../user/authentication.service';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -44,13 +45,27 @@ export class MemoryService {
     addPhoto$(photos: File, id: number){
      const fd = new FormData();
      fd.append('image', photos, photos.name)
-     console.log("service fd " + fd);
 
      return this.http.post(`${environment.apiUrl}/memories/${id}`, fd)
      .subscribe(res => {
        console.log(res);
      });
     }
+
+    //POGING MEERDERE AFBEELDINGEN IN EEN KEER
+    // addPhoto$(photos: File[], id: number){
+    //   const fd = new FormData();
+
+    //   for(let i = 0; i < photos.length; i++){
+    //       fd.append(`image${i}`, photos[i], photos[i].name)
+    //   }
+    //   console.log("Bezig met opslaan ");
+ 
+    //   return this.http.post(`${environment.apiUrl}/memories/${id}`, fd)
+    //   .subscribe(res => {
+    //     console.log(res);
+    //   });
+    //  }
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{

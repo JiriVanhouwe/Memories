@@ -13,3 +13,9 @@
     position: absolute;
     z-index: -1;
 }
+
+.jumbotron {
+    background-image: url("/assets/view1.jpg");
+    background-size: auto;
+    background-position: 50% 20%;
+  }

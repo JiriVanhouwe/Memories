@@ -1,3 +1,6 @@
+<main class="container-full-bg">
+  <section class="jumbotron" style="height: max-content;">
+
 <div class="container">
     <h4>Registreer</h4>
     <form [formGroup]="user" (ngSubmit)="onSubmit()">
@@ -79,12 +82,14 @@
         </span>
         </span>
 
-        <button style="margin-right:10px;" type="submit" class="btn btn-outline-primary"> Registreer </button>
-        <button class="btn btn-outline-secondary" [routerLink]="['/login']">Login</button>
+        <button style="margin-right:10px;" type="submit" class="btn btn-outline-warning"> Registreer </button>
           
     </form>
 
-    <div class="error" *ngIf="errorMessage">
-        Er ging iets fout: {{ errorMessage }}
+    <div style="margin:10px" class="alert alert-secondary" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
 </div>
+</section>
+</main>
+

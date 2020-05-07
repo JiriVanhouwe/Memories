@@ -1,0 +1,5 @@
+.jumbotron {
+    background-image: url("/assets/view1.jpg");
+    background-size: auto;
+    background-position: 50% 40%;
+  }

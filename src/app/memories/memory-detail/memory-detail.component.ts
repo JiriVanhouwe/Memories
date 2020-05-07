@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class MemoryDetailComponent implements OnInit {
 
-  public images = [];
+  public images :File[] = [];
   public memory: Memory;
   selectedFile: File = null;
 
@@ -22,24 +22,13 @@ export class MemoryDetailComponent implements OnInit {
   ngOnInit(): void {
     this._route.data.subscribe(item => this.memory = item['memory']); //via de resolver wordt eerst de memory geladen en dan getoond.
   }
-  
-  deleteMemory(){
-    if(confirm(`Wil je memory ${this.memory.title} ${this.memory.id} verwijderen?`)){
-      this._memoryService.deleteMemory(this.memory.id).subscribe({
-        next: () => this.deleteCompleted(),
-        error: err => this.getErrorMessage(err)
-    });
-    }
-  }
-
-  deleteCompleted(){
-    this._router.navigate(['/memories']);
-  }
 
   addFriend(){
     this._router.navigate([`/memories/${this.memory.id}/add`]);
   }
 
+  //POGING MEERDERE AFBEELDINGEN IN EEN KEER
+  
   // onFileChange(event){
   //   if (event.target.files && event.target.files[0]) {
   //     var filesAmount = event.target.files.length;
@@ -55,6 +44,11 @@ export class MemoryDetailComponent implements OnInit {
   //     }
   //     this.postImage();
   //   } 
+  // }
+
+  // postImage(){
+  //   if(this.images != null)
+  //     this._memoryService.addPhoto$(this.images, this.memory.id);
   // }
 
   onFileChange(event){

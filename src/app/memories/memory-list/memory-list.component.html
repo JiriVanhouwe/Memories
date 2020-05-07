@@ -5,7 +5,7 @@
       <p class="lead text-muted">
        Zowel kleine als grootse momenten verzameld </p>
         <div>
-          <button type="button" class="btn btn-primary" (click)="clickAddMemory()" style="margin-bottom: 10px;">
+          <button type="button" class="btn btn-warning" (click)="clickAddMemory()" style="margin-bottom: 10px;">
             Nieuwe memory
           </button>
         </div>
@@ -21,9 +21,11 @@
     <div *ngIf="memories$ | async as memories">
       <div *ngIf="memories && memories.length">
         <div class="row">
-        <div *ngFor="let memory of memories | memoryFilter: listFilter" class="col-4 d-flex align-items-stretch">
+        <div *ngFor="let memory of memories | memoryFilter: listFilter"  style="float:left" class="col-md-4 d-flex align-items-stretch">
           <div class="card mb-3">
+            <i class="fas fa-times pull-right top-right" (click)="deleteMemory(memory.id)" style="cursor: pointer;"></i>
             <div class="card-body">
+              
               <a [routerLink]="['/memories', memory.id]">
                 <img
                   class="card-img-top"
@@ -31,16 +33,18 @@
                   [title]="memory.title"
                   alt="{{ memory.title }}"
               /></a>
-              <h5 class="card-title">{{ memory.title }}</h5>
-              <p class="card-text">{{ memory.subTitle }}</p>
-              <p class="card-footer text-muted">
-                {{ memory.startDate | date: "dd/MM/yyyy" }} -
-                {{ memory.endDate | date: "dd/MM/yyyy" }}
-                <app-location
+
+              <ul class="list-group list-group-flush" style="margin-top: 8px">
+                <li id="titleCard" class="list-group-item" style="font-weight: bold;">{{memory.title}}</li>
+                <li class="list-group-item list-group-item-light">{{memory.subTitle}}</li>
+                <li class="list-group-item list-group-item-light"> {{ memory.startDate | date: "dd/MM/yyyy" }} -
+                  {{ memory.endDate | date: "dd/MM/yyyy" }}</li>
+                <li class="list-group-item list-group-item-light"><app-location
                   [country]="memory.location.country"
                   [city]="memory.location.city"
-                ></app-location>
-              </p>
+                ></app-location></li>
+              </ul>
+              
             </div>
           </div></div>
         </div>

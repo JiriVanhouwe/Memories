@@ -6,7 +6,7 @@
 
 
 .jumbotron {
-    background-image: url("assets/background.jpeg");
+    background-image: url("/assets/background.jpeg");
     background-size: auto;
     background-position: 50% 54%;
   }

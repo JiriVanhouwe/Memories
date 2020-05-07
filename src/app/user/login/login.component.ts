@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
           if (err.error instanceof Error) {
             this.errorMessage = `Fout bij inloggen: ${this.user.value.username}: ${err.error.message}`;
           } else {
-            this.errorMessage = `Fout: ${err.status} tijdens het inloggen ${this.user.value.username}: ${err.error}`;
+            this.errorMessage = `Fout:${err.error.message}`;
           }
         }
       );

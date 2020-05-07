@@ -51,15 +51,6 @@ export class Memory{
         return mem;
     }
 
-    toDataUrl(){
-        for(var item in this._photos){
-            this._photosToDataUrl.push()
-        }
-
-
-    }
-
- 
     toJSON(): IMemory{
         return <IMemory>{
             title: this.title,
@@ -69,7 +60,6 @@ export class Memory{
             location: this.location.toJSON()
         }
     }
-
 
     addFriend(friend: Friend){
         if(friend != null)

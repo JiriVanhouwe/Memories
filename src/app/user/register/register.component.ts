@@ -129,9 +129,9 @@ export class RegisterComponent implements OnInit {
         (err: HttpErrorResponse) => {
           console.log(err);
           if (err.error instanceof Error) {
-            this.errorMessage = `Fout bij registreren ${this.user.value.email}: ${err.error.message}`;
+            this.errorMessage = `Gelieve bovenstaande gegevens correct in te vullen.`;
           } else {
-            this.errorMessage = `Fout ${err.status} tijdens inloggen van ${this.user.value.email}: ${err.error}`;
+            this.errorMessage = `Gelieve bovenstaande gegevens correct in te vullen.`;
           }
         }
       );

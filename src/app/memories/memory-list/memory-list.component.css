@@ -1,0 +1,10 @@
+#titleCard{
+    font-size: large;
+}
+
+.top-right {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: lightgrey
+}
