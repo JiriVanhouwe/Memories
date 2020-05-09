@@ -1,0 +1,11 @@
+[
+    {
+        "id":1,
+        "title":"Tegels tellen in de living",
+        "subTitle":"Jezelf bezighouden tijdens Corona",
+        "startDate":"2019-05-15T00:00:00",
+        "endDate":"2019-05-20T00:00:00",
+        "location":{"locationId":2,"country":"België","city":"Gent"},
+        "photo":{"photoId":1,"baseString":"photostring"}
+      }
+]
