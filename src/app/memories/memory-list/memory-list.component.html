@@ -12,6 +12,7 @@
         <input type="text" 
         data-cy="filterInput"
         (keyup)="filterMemories$.next($event.target.value)"
+        [value]="listFilter"
         class="form-control justify-content-center"  
         style="width: 50%; margin: 0 auto; margin-bottom: 10px;"
         placeholder="zoeken"/>   
@@ -22,7 +23,7 @@
     <div *ngIf="memories$ | async as memories">
       <div *ngIf="memories && memories.length">
         <div class="row">
-        <div *ngFor="let memory of memories | memoryFilter: listFilter"  style="float:left" class="col-md-4 d-flex align-items-stretch">
+        <div *ngFor="let memory of memories"  style="float:left" class="col-md-4 d-flex align-items-stretch">
           <div class="card mb-3" data-cy="memoryCard">
             <i class="fas fa-times pull-right top-right" (click)="deleteMemory(memory.id)" style="cursor: pointer;"></i>
             <div class="card-body">

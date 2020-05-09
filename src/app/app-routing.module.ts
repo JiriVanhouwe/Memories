@@ -8,7 +8,7 @@ import { AuthGuard } from './user/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'recipe',
+    path: 'memory',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./memories/memories.module').then((mod) => mod.MemoriesModule),

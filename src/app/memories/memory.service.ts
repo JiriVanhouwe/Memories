@@ -2,24 +2,35 @@ import { Injectable } from '@angular/core';
 import { IMemory, Memory } from './memory';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Friend, IFriend } from '../friends/friend';
+import { Friend } from '../friends/friend';
 import { AuthenticationService } from '../user/authentication.service';
-import { FormBuilder } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MemoryService {
 
+  private _reloadMemories$ = new BehaviorSubject<boolean>(true);
+
   constructor(private http: HttpClient){
 
   }
 
+  getMemories$(filter? : string){
+    return this._reloadMemories$.pipe(
+        switchMap(() => this.fetchMemories$(filter))
+    );
+  }
+
     //GET ALL MEMORIES
-    getMemories$() : Observable<Memory[]>{
-      return this.http.get<Memory[]>(`${environment.apiUrl}/memories/`)
+    fetchMemories$(filter? : string) : Observable<Memory[]>{
+      let params = new HttpParams();
+      params = filter ? params.append('filter', filter) : params;
+
+      console.log("de filter: " + filter)
+      return this.http.get<Memory[]>(`${environment.apiUrl}/memories/`, {params})
         .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
     }
 
@@ -79,10 +90,12 @@ export class MemoryService {
     }
 
     //DELETE MEMORY
-    deleteMemory(id: number) : Observable<{}>{
+    deleteMemory(id: number){
       return this.http
       .delete(`${environment.apiUrl}/memories/${id}`)
       .pipe(tap(data => console.log(`Memory met id ${id} werd verwijderd.`)), catchError(this.handleError))
+      .subscribe(() => {this._reloadMemories$.next(true);
+      });
     }
 
 

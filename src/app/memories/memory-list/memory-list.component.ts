@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
-import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Observable, Subject, EMPTY } from 'rxjs';
+import { distinctUntilChanged, debounceTime, map, catchError, switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,16 +16,31 @@ export class MemoryListComponent implements OnInit {
   private _listFilter : string = '';
   public filterMemories$ = new Subject<string>();
   private _memories$: Observable<Memory[]>;
-  
-  //@Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private memoryService: MemoryService, private _router : Router) { 
+  public errorMessage: string = '';
+
+  constructor(private memoryService: MemoryService, private _router : Router, private _route: ActivatedRoute) { 
     this.filterMemories$.pipe(
       distinctUntilChanged(),
-      debounceTime(400),
-      map(val => val.toLowerCase())
+      debounceTime(400))
+    .subscribe(val => {
+      const params = val? {queryParams: {filter:val}} :undefined;
+      this._router.navigate(['/memories'], params); 
+    });
+
+    this._memories$ = this._route.queryParams.pipe(
+      switchMap((params) => 
+      { 
+        if(params['filter']){
+          this._listFilter = params['filter'];
+        }
+      return this.memoryService.getMemories$(params['filter']);
+    })
     )
-    .subscribe(val => (this.listFilter = val));
+      .pipe(catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      }));
   }
 
   get memories$(){
@@ -42,15 +57,8 @@ export class MemoryListComponent implements OnInit {
 
     deleteMemory(id:number){
       if(confirm(`Wil je deze memory verwijderen?`)){
-        this.memoryService.deleteMemory(id).subscribe({
-          next: () => this.deleteCompleted(),
-          error: err => console.log(err)
-      });
+        this.memoryService.deleteMemory(id);
       }
-    }
-
-    deleteCompleted(){
-      this._router.navigate(['/memories']);
     }
 
   clickAddMemory():void{
@@ -58,7 +66,7 @@ export class MemoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-    this._memories$ = this.memoryService.getMemories$();   
+    //this._memories$ = this.memoryService.getMemories$();   
   }
 
 }
