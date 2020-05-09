@@ -53,10 +53,6 @@ export class FriendsComponent implements OnInit {
 }
 
 
-reloadPage(){
-  this._router.navigateByUrl('/friends');
-}
-
   get friends$(){
     return this._userWithFriends;
   }

@@ -16,19 +16,25 @@
         />
         <a
           [routerLink]="['/memories', memory.id, 'add']"
-          class="btn btn-warning my-2"
+          id="buttonHeader"
+          class="btn my-2"
           style="margin-right: 5px;"
           >Vrienden toevoegen</a
         >
         <a
           [routerLink]="['/memories', memory.id, 'edit']"
-          class="btn btn-info my-2"
+          id="buttonHeader"
+          class="btn my-2"
           style="margin-right: 5px;"
           >Bewerk memory</a
         >
       </p>
     </div>
   </section>
+
+  <div class="container">
+    <div class="alert alert-success text-center" *ngIf="message">{{message}}</div>
+    </div>
 
   <div class="album py-5 bg-light">
     <div class="container">

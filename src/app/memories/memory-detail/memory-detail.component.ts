@@ -16,6 +16,7 @@ export class MemoryDetailComponent implements OnInit {
   public images :File[] = [];
   public memory: Memory;
   selectedFile: File = null;
+  message: string = "";
 
   constructor(private _route: ActivatedRoute, private _memoryService: MemoryService, private _location: Location, private _router : Router) { }
 
@@ -58,7 +59,10 @@ export class MemoryDetailComponent implements OnInit {
 
   postImage(){
     if(this.selectedFile != null){
-      this._memoryService.addPhoto$(this.selectedFile, this.memory.id);
+      this._memoryService.addPhoto$(this.selectedFile, this.memory.id).subscribe({
+        next: () => this.message = "De foto werd toegevoegd.",
+        error: err => this.message = "Er ging iets mis..."
+    });
     }
   }
   

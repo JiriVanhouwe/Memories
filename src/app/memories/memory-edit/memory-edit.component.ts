@@ -5,6 +5,7 @@ import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { LocationMemory } from '../location';
 
 @Component({
   selector: 'app-memory-edit',
@@ -56,9 +57,15 @@ export class MemoryEditComponent implements OnInit {
   save() : void{
     if(this.memoryForm.valid){
       if(this.memoryForm.dirty){ //checken of er iets gewijzigd werd
-        const mem = {...this.memory, ...this.memoryForm.value}; //checkt welke waarden anders zijn
+       //const mem = {...this.memory, ...this.memoryForm.value}; //checkt welke waarden anders zijn
 
-        this._memoryService.updateMemory$(mem).subscribe({
+       this.memory.title = this.memoryForm.value.title;
+       this.memory.subtitle = this.memoryForm.value.subTitle;
+       this.memory.startDate = this.memoryForm.value.startDate;
+       this.memory.endDate = this.memoryForm.value.endDate;
+       this.memory.location = (new LocationMemory(this.memoryForm.value.country, this.memoryForm.value.city));
+
+        this._memoryService.updateMemory$(this.memory).subscribe({
           next: () => this.saveCompleted(),
           error: err => this.getErrorMessage(err)
         })

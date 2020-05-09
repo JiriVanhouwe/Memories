@@ -27,7 +27,7 @@ export class MemoryService {
     getMemory$(id : string) : Observable<Memory>{
       const url = `${environment.apiUrl}/memories/${id}`;
       return this.http.get<Memory>(url).pipe(
-        tap(data => console.log('getMemory: ' + JSON.stringify(data))), catchError(this.handleError)
+        tap(data => console.log('getMemory: ' + JSON.stringify(data.id + " " + data.title + " " + data.subTitle))), catchError(this.handleError)
       )
     }
 
@@ -46,10 +46,7 @@ export class MemoryService {
      const fd = new FormData();
      fd.append('image', photos, photos.name)
 
-     return this.http.post(`${environment.apiUrl}/memories/${id}`, fd)
-     .subscribe(res => {
-       console.log(res);
-     });
+     return this.http.post(`${environment.apiUrl}/memories/${id}`, fd);
     }
 
     //POGING MEERDERE AFBEELDINGEN IN EEN KEER
@@ -69,7 +66,8 @@ export class MemoryService {
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
-     // console.log(JSON.stringify(memory))
+      console.log("Veranderd: " + JSON.stringify(memory.title + " " +memory.subTitle + " " + memory.location.country + " " + memory.location.city))
+      
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
       const url = `${environment.apiUrl}/memories/${memory.id}`;
 

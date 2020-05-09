@@ -105,4 +105,22 @@ export class Memory{
     get friends(): Friend[]{
         return this._friends;
     }
+
+    set title(value: string){
+        this._title = value;
+    }
+    set subtitle(value: string){
+        this._subTitle = this.subTitle;
+    }
+    set startDate(value: Date){
+        this._startDate = value;
+    }
+
+    set endDate(value: Date){
+        this._endDate = value;
+    }
+    set location(value: LocationMemory)
+    {
+        this._location = value;
+    }
 }

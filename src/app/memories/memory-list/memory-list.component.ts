@@ -1,11 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { IMemory, Memory } from '../memory';
+import { Memory } from '../memory';
 import { MemoryService } from '../memory.service';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime, map, catchError } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/user/authentication.service';
-import { Friend } from 'src/app/friends/friend';
 
 
 @Component({
@@ -15,11 +13,11 @@ import { Friend } from 'src/app/friends/friend';
 })
 
 export class MemoryListComponent implements OnInit {
-  private _listFilter : string;
+  private _listFilter : string = '';
   public filterMemories$ = new Subject<string>();
   private _memories$: Observable<Memory[]>;
   
-  @Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
+  //@Output() memoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private memoryService: MemoryService, private _router : Router) { 
     this.filterMemories$.pipe(

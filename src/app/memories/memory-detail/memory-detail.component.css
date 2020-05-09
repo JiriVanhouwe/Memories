@@ -1,10 +1,22 @@
 #label-photo {
     cursor: pointer;
-    background-color: #0069D9;
+    color:white;
+    background-color: #138496;
     border-radius: 4px;
     padding: 6px;
     margin-right: 5px;
     margin-top: 3px;
+}
+#label-photo:hover{
+    background-color: orange;
+}
+
+#buttonHeader{
+    background-color: #138496;
+    color: white;
+}
+#buttonHeader:hover{
+    background-color: orange;
 }
 
 
