@@ -36,6 +36,12 @@
     <div class="alert alert-success text-center" *ngIf="message">{{message}}</div>
     </div>
 
+    <div *ngIf="memory.members">
+    <div class="container"  style="margin-bottom: 10px;">
+      <span style="margin:4px" class="badge badge-light" *ngFor="let friend of memory.members">{{friend.firstName}} {{friend.lastName}}</span>
+    </div>
+  </div>
+
   <div class="album py-5 bg-light">
     <div class="container">
       <div *ngIf="memory.photos">

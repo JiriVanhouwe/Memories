@@ -3,7 +3,7 @@
     class="container"
     *ngIf="loggedInUser$ | async as user; else loginTemplate"
   >
-    <a class="navbar-brand" [routerLink]="['/home']">Memories</a>
+    <a class="navbar-brand" [routerLink]="['/home']">Memories</a> 
     <div>
       <small>van {{ user }}</small>
     </div>

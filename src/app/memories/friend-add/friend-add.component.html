@@ -6,19 +6,24 @@
       </div>
     </section>
   </main>
-  
-  <div class="alert alert-success " *ngIf="message">{{message}</div>
 
-  <div *ngFor="let friend of _userWithFriends.friends">
+<div *ngIf="friends.length; else noFriendsToShow">
+  <div *ngFor="let friend of friends">
     <div class="container d-flex justify-content-center">
       <div class="list-group col-6">
         <div
           class="list-group-item list-group-item-action list-group-item-light"
           style="margin-bottom: 3px;"
         >
-          {{ friend.firstName }} {{ friend.lastName }}
+          {{ friend }}
           <i class="fas fa-plus pull-right" style="cursor: pointer;" (click)="addFriendToMemory(friend)"></i>
         </div>
       </div>
     </div>
   </div> 
+</div>
+<ng-template #noFriendsToShow>
+  <div class="container alert alert-success text-center">
+    <p>Je hebt geen vrienden die je aan deze memory kan toevoegen.</p>
+  </div>
+</ng-template>

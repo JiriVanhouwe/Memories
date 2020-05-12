@@ -12,14 +12,14 @@ import { MemoryResolver } from './MemoryResolver';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FriendAddComponent } from './friend-add/friend-add.component';
 import { FriendsModule } from '../friends/friends.module';
-import { FriendResolver } from '../friends/friend-resolver';
+import { AddFriendMemoryResolver } from './addFriendMemoryResolver';
 
 const routes : Routes = [
   { path: 'memories', component: MemoryListComponent },
   { path: 'memories/add', component: MemoryAddComponent },
   { path: 'memories/:id', component: MemoryDetailComponent, resolve:{ memory: MemoryResolver} }, 
   { path: 'memories/:id/edit', component: MemoryEditComponent, resolve:{memory: MemoryResolver}},
-  { path: 'memories/:id/add', component: FriendAddComponent, resolve:{memory: MemoryResolver, friend: FriendResolver}}
+  { path: 'memories/:id/add', component: FriendAddComponent, resolve:{memory: MemoryResolver, any: AddFriendMemoryResolver}}
 ]
 
 @NgModule({

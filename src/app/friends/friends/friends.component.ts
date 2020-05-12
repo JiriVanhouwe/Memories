@@ -29,9 +29,10 @@ export class FriendsComponent implements OnInit {
     if(confirm(`Ben je zeker dat je  ${email} wil verwijderen?`)){
       this._memoryService.deleteFriend(email)
       .pipe(catchError((err) => {this.errorMessage = err; return EMPTY;}))
-      .subscribe(data => this.message = `${email} werd verwijderd`);
+      .subscribe(data => {
+        this.message = `${email} werd verwijderd`;
+      })
   }
- 
 }
 
   addFriend():void{

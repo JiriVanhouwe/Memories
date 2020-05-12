@@ -5,7 +5,6 @@ import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Friend } from '../friends/friend';
-import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable({
     providedIn: 'root'
@@ -29,9 +28,8 @@ export class MemoryService {
       let params = new HttpParams();
       params = filter ? params.append('filter', filter) : params;
 
-      console.log("de filter: " + filter)
       return this.http.get<Memory[]>(`${environment.apiUrl}/memories/`, {params})
-        .pipe(tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
+        .pipe(tap(data => data.forEach(d => console.log(d.id + " " + d.title + " " + d.subTitle))), catchError(this.handleError));
     }
 
     //GET MEMORY BY ID
@@ -89,6 +87,24 @@ export class MemoryService {
       );
     }
 
+    //GET FRIENDS THAT ARE NOT CONNECTED TO MEMORY
+    //TODO nog uitwerken
+    getFriendsToAddToMemory(id: number){
+      const url = `${environment.apiUrl}/memories/${id}/add`;
+      return this.http.get<string[]>(url).pipe(
+        tap(data => console.log(data)), catchError(this.handleError)
+      )
+    }
+
+    //ADD FRIEND TO MEMORY
+    addFriendToMemory$(id: number, email: string){
+      const url = `${environment.apiUrl}/memories/${id}/add`;
+      let param = new HttpParams().set("email", email);
+
+      return this.http.put<string>(url, {}, {params:param})
+      .pipe(tap(() => console.log('Vriend toegevoegd: ' + email + " memory id: " + id)),catchError(this.handleError));
+    }
+
     //DELETE MEMORY
     deleteMemory(id: number){
       return this.http
@@ -128,7 +144,7 @@ export class MemoryService {
       .pipe(tap(data => console.log(`Vriend ${email} werd verwijderd.`)), catchError(this.handleError))
     }
 
-    //ADD A FRIEND
+    //ADD A FRIEND 
     addFriend(email: string): Observable<Object>{
       let param = new HttpParams().set("email", email);
       console.log("param " + param);

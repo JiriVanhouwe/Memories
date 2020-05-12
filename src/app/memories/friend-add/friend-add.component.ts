@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MemoryService } from '../memory.service';
 import { Memory } from '../memory';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Friend } from 'src/app/friends/friend';
 
 @Component({
@@ -10,36 +10,22 @@ import { Friend } from 'src/app/friends/friend';
   styleUrls: ['./friend-add.component.css']
 })
 export class FriendAddComponent implements OnInit {
-  public _userWithFriends: Friend;
   public memory: Memory;
-  message: string = "";
+  public friends: string[]; //array met de emailadressen van vrienden die nog geen lid zijn van deze memory
 
-  constructor(private _memoryService: MemoryService, private _route: ActivatedRoute) { }
+  constructor(private _memoryService: MemoryService, private _route: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
     this._route.data.subscribe(item => this.memory = item['memory']);
-    this._route.data.subscribe(item => this._userWithFriends = item['friend']);
+    this._route.data.subscribe(item => this.friends = item['any']);
   }
 
 
-  addFriendToMemory(friend: Friend){
-    console.log(friend.email);
-    console.log("mem: " + this.memory.subTitle);
-   
-    //todo omzetten naar een memory ipv opject.
-     this.memory.addFriend(friend);
-    this._memoryService.updateMemory$(this.memory).subscribe({
-      next: () => this.message = `${friend.email} werd toegevoegd`,
-      error: err => this.getErrorMessage(err)
-  });
+  addFriendToMemory(friend: string){
+    this._memoryService.addFriendToMemory$(this.memory.id, friend).subscribe(data => this.goBack());  
   }
 
-  getErrorMessage(errors: any): string {
-    if (!errors) {
-      return null;
-    } else{
-      return errors;
-    }
+  goBack(){
+    this._router.navigate([`/memories/${this.memory.id}`]);
   }
-
 }

@@ -11,7 +11,8 @@ export interface IMemory{
     imageUrl: string;
     location: ILocation;
     photos: [];
-    friends: Friend[];
+    //friends: Friend[];
+    members: Friend[];
 }
 
 export class Memory{
@@ -19,9 +20,9 @@ export class Memory{
     private _location: LocationMemory;
     private _imageUrl: string;  //foto voor thumbnail
     private _photos: [];
-    private _friends: Friend[];
+   // private _friends: Friend[];
+    private _members: Friend[];
 
-    private _photosToDataUrl: [];
 
     constructor(
         private _title: string, 
@@ -45,7 +46,8 @@ export class Memory{
         const mem = new Memory(
             json.title, json.subTitle, new Date(json.startDate), new Date(json.endDate), LocationMemory.fromJSON(json.location)
         );
-        mem._friends = json.friends;
+        // mem._friends = json.friends;
+        mem._members = json.members;
         mem._photos = json.photos;
         mem._id = json.id;
         return mem;
@@ -61,10 +63,6 @@ export class Memory{
         }
     }
 
-    addFriend(friend: Friend){
-        if(friend != null)
-         this._friends.push(friend);
- }
 
     set imageUrl(value: string){
         this._imageUrl = value;
@@ -102,8 +100,12 @@ export class Memory{
     get photos(): string[]{
         return this._photos;
     }
-    get friends(): Friend[]{
-        return this._friends;
+    // get friends(): Friend[]{
+    //     return this._friends;
+    // }
+
+    get members(): Friend[]{
+        return this._members;
     }
 
     set title(value: string){

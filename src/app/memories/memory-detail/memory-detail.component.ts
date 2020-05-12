@@ -22,6 +22,8 @@ export class MemoryDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.data.subscribe(item => this.memory = item['memory']); //via de resolver wordt eerst de memory geladen en dan getoond.
+
+    console.log(this.memory)
   }
 
   addFriend(){
