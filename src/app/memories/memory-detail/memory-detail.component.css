@@ -31,3 +31,10 @@
     background-size: auto;
     background-position: 50% 20%;
   }
+
+
+  .mem-img{
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}

@@ -67,6 +67,7 @@ export class MemoryDetailComponent implements OnInit {
     });
     }
   }
+
   
   getErrorMessage(errors: any): string {
     if (!errors) {

@@ -13,6 +13,8 @@ export class MemoryService {
 
   private _reloadMemories$ = new BehaviorSubject<boolean>(true);
 
+  private _reloadFriends$ = new BehaviorSubject<boolean>(true);
+
   constructor(private http: HttpClient){
 
   }
@@ -58,21 +60,6 @@ export class MemoryService {
      return this.http.post(`${environment.apiUrl}/memories/${id}`, fd);
     }
 
-    //POGING MEERDERE AFBEELDINGEN IN EEN KEER
-    // addPhoto$(photos: File[], id: number){
-    //   const fd = new FormData();
-
-    //   for(let i = 0; i < photos.length; i++){
-    //       fd.append(`image${i}`, photos[i], photos[i].name)
-    //   }
-    //   console.log("Bezig met opslaan ");
- 
-    //   return this.http.post(`${environment.apiUrl}/memories/${id}`, fd)
-    //   .subscribe(res => {
-    //     console.log(res);
-    //   });
-    //  }
-
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
       console.log("Veranderd: " + JSON.stringify(memory.title + " " +memory.subTitle + " " + memory.location.country + " " + memory.location.city))
@@ -88,7 +75,6 @@ export class MemoryService {
     }
 
     //GET FRIENDS THAT ARE NOT CONNECTED TO MEMORY
-    //TODO nog uitwerken
     getFriendsToAddToMemory(id: number){
       const url = `${environment.apiUrl}/memories/${id}/add`;
       return this.http.get<string[]>(url).pipe(
@@ -117,13 +103,22 @@ export class MemoryService {
 
     //friends page
     //GET ALL FRIENDS
-    getFriends$(): Observable<Friend>{
+    getFriends$(){
+      // const url = `${environment.apiUrl}/friends/`;
+      // return this.http.get<Friend>(url).pipe(
+      //   tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
+      // )
+       return this._reloadFriends$.pipe(switchMap(() => this.fetchFriends$()));
+    }
+
+    fetchFriends$(): Observable<Friend>{
       const url = `${environment.apiUrl}/friends/`;
       return this.http.get<Friend>(url).pipe(
-        tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
+        tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError), map(data => Friend.fromJSON(data))
       )
     }
 
+  
     //INVITE NEW USER
     inviteNewUser(email: string): Observable<Object>{
       const url = `${environment.apiUrl}/friends/${email}`;
@@ -135,13 +130,14 @@ export class MemoryService {
     }
 
     //DELETE A FRIEND
-    deleteFriend(email: string): Observable<{}>{
+    deleteFriend(email: string){
       let param = new HttpParams().set("email", email);
       const url = `${environment.apiUrl}/friends/`;
 
       return this.http
       .delete(url, {params: param})
       .pipe(tap(data => console.log(`Vriend ${email} werd verwijderd.`)), catchError(this.handleError))
+      .subscribe(() => {this._reloadFriends$.next(true)})
     }
 
     //ADD A FRIEND 

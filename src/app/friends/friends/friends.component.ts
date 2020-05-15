@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MemoryService } from '../../memories/memory.service';
 import { Friend } from '../friend';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-friends',
@@ -11,27 +11,27 @@ import { EMPTY } from 'rxjs';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-   public _userWithFriends: Friend;
+   public userWithFriends: Observable<Friend>;
    public _emailInput: string;
    public message: string = ''; 
    public errorMessage: string = '';
 
+
   constructor(private _memoryService: MemoryService,private _route: ActivatedRoute, private _router: Router) {
-    
+    this.userWithFriends = this._memoryService.getFriends$();
    }
 
   ngOnInit(): void {
-    this._route.data.subscribe(item => this._userWithFriends = item['friend']); //via de resolver wordt eerst de memory geladen en dan getoond.
-    console.log(`${this._userWithFriends.firstName} en zijn vrienden.`);
+    //this._route.data.subscribe(item => this._userWithFriends = item['friend']); //via de resolver wordt eerst de memory geladen en dan getoond.
+    //console.log(`${this._userWithFriends.firstName} en zijn vrienden.`);
+
+
   }
 
   deleteFriend(email:string): void{
     if(confirm(`Ben je zeker dat je  ${email} wil verwijderen?`)){
-      this._memoryService.deleteFriend(email)
-      .pipe(catchError((err) => {this.errorMessage = err; return EMPTY;}))
-      .subscribe(data => {
-        this.message = `${email} werd verwijderd`;
-      })
+      this._memoryService.deleteFriend(email);
+      
   }
 }
 
@@ -55,7 +55,7 @@ export class FriendsComponent implements OnInit {
 
 
   get friends$(){
-    return this._userWithFriends;
+    return this.userWithFriends;
   }
 
   set emailInput(value:string){

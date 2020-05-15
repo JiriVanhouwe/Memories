@@ -13,13 +13,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FriendAddComponent } from './friend-add/friend-add.component';
 import { FriendsModule } from '../friends/friends.module';
 import { AddFriendMemoryResolver } from './addFriendMemoryResolver';
+import { AuthGuard } from '../user/auth.guard';
 
 const routes : Routes = [
-  { path: 'memories', component: MemoryListComponent },
-  { path: 'memories/add', component: MemoryAddComponent },
-  { path: 'memories/:id', component: MemoryDetailComponent, resolve:{ memory: MemoryResolver} }, 
-  { path: 'memories/:id/edit', component: MemoryEditComponent, resolve:{memory: MemoryResolver}},
-  { path: 'memories/:id/add', component: FriendAddComponent, resolve:{memory: MemoryResolver, any: AddFriendMemoryResolver}}
+  
+  { path: 'memories', canActivate: [AuthGuard], component: MemoryListComponent },
+  { path: 'memories/add', canActivate: [AuthGuard], component: MemoryAddComponent },
+  { path: 'memories/:id', canActivate: [AuthGuard], component: MemoryDetailComponent, resolve:{ memory: MemoryResolver} }, 
+  { path: 'memories/:id/edit', canActivate: [AuthGuard], component: MemoryEditComponent, resolve:{memory: MemoryResolver}},
+  { path: 'memories/:id/add', canActivate: [AuthGuard], component: FriendAddComponent, resolve:{memory: MemoryResolver, any: AddFriendMemoryResolver}}
 ]
 
 @NgModule({

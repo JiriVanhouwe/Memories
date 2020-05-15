@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},

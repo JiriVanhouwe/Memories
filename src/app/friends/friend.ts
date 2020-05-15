@@ -14,6 +14,16 @@ export interface IFriend{
         private _friends: Friend[]){
     }
 
+    static fromJSON(json: IFriend): Friend{
+        if(json.friends)
+            return new Friend(json.firstName, json.lastName, json.email, json.friends.map(Friend.fromJSON));
+            else  return new Friend(json.firstName, json.lastName, json.email, []);
+        
+    }
+
+
+    
+
     get firstName(): string{
         return this._firstName;
     }
