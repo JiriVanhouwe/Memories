@@ -22,9 +22,6 @@ export class FriendsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    //this._route.data.subscribe(item => this._userWithFriends = item['friend']); //via de resolver wordt eerst de memory geladen en dan getoond.
-    //console.log(`${this._userWithFriends.firstName} en zijn vrienden.`);
-
 
   }
 
@@ -37,13 +34,8 @@ export class FriendsComponent implements OnInit {
 
   addFriend():void{
     if(this._emailInput != null){
-      this._memoryService.addFriend(this._emailInput).pipe(
-        catchError((err) => {
-          this.errorMessage = err;
-          return EMPTY;
-        })
-      ).subscribe(data => {this.message = data.toLocaleString()});
-    }
+      this._memoryService.addFriend(this._emailInput);
+    } 
   } 
 
   inviteFriend(): void{

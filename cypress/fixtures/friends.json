@@ -1,0 +1,22 @@
+{
+    "firstName":"Jiri",
+    "lastName":"Vanhouwe",
+    "email":"jiri.vanhouwe@gmail.com",
+    "friends":
+        [{
+            "firstName":"Angelique",
+            "lastName":"Daponte",
+            "email":"angelique.daponte@gmail.com"
+        },
+        {
+             "firstName":"Frank",
+             "lastName":"Deboosere",
+             "email":"frank.deboosere@gmail.com"
+        },
+        {
+            "firstName":"Paul",
+            "lastName":"Jambers",
+            "email":"paul.jambers@gmail.com"
+        }
+        ]
+}

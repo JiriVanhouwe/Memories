@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./memory-detail.component.css']
 })
 export class MemoryDetailComponent implements OnInit {
-
+  
   public images :File[] = [];
   public memory: Memory;
   selectedFile: File = null;
@@ -80,4 +80,6 @@ export class MemoryDetailComponent implements OnInit {
   goBack(): void{
      this._location.back();
   }
+
+
 }

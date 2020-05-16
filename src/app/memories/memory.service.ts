@@ -42,6 +42,15 @@ export class MemoryService {
       )
     }
 
+
+    //POST PHOTO
+    addPhoto$(photos: File, id: number){
+      const fd = new FormData();
+      fd.append('image', photos, photos.name)
+ 
+      return this.http.post(`${environment.apiUrl}/memories/${id}`, fd);
+     }
+
     //POST MEMORY
     postMemory$(memory: Memory){
       console.log("kom ik hier");
@@ -52,13 +61,6 @@ export class MemoryService {
       )      
     }
 
-    //POST PHOTO
-    addPhoto$(photos: File, id: number){
-     const fd = new FormData();
-     fd.append('image', photos, photos.name)
-
-     return this.http.post(`${environment.apiUrl}/memories/${id}`, fd);
-    }
 
     //PUT MEMORY
     updateMemory$(memory: Memory): Observable<Memory>{
@@ -104,10 +106,6 @@ export class MemoryService {
     //friends page
     //GET ALL FRIENDS
     getFriends$(){
-      // const url = `${environment.apiUrl}/friends/`;
-      // return this.http.get<Friend>(url).pipe(
-      //   tap(data => console.log('Get friends: ' + JSON.stringify(data))), catchError(this.handleError)
-      // )
        return this._reloadFriends$.pipe(switchMap(() => this.fetchFriends$()));
     }
 
@@ -141,14 +139,15 @@ export class MemoryService {
     }
 
     //ADD A FRIEND 
-    addFriend(email: string): Observable<Object>{
+    addFriend(email: string){
       let param = new HttpParams().set("email", email);
       console.log("param " + param);
       const url = `${environment.apiUrl}/friends/`;
 
       return this.http
       .put<string>(url, {}, {params: param})
-      .pipe(catchError(this.handleError))      
+      .pipe(catchError(this.handleError))
+      .subscribe(() => {this._reloadFriends$.next(true)})     
     }
 
     handleError(err: any): Observable<never> {

@@ -8,7 +8,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { AuthGuard } from '../user/auth.guard';
 
 const routes : Routes = [
-  { path: 'friends', canActivate: [AuthGuard], component: FriendsComponent, resolve : {friend: FriendResolver}}
+  { path: 'friends', canActivate: [AuthGuard], component: FriendsComponent}
 ]
 
 @NgModule({

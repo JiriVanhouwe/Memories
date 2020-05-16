@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', () => {
-    const email = 'jiri.vanhouwe@gmail.be';
+    const email = 'jiri.vanhouwe@gmail.com';
   
     cy.request({
       method: 'POST',
