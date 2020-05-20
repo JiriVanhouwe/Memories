@@ -67,7 +67,7 @@ export class MemoryService {
       console.log("Veranderd: " + JSON.stringify(memory.title + " " +memory.subTitle + " " + memory.location.country + " " + memory.location.city))
       
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
-      const url = `${environment.apiUrl}/memories/${memory.id}`;
+      const url = `${environment.apiUrl}/memories/${memory.id}/edit`;
 
       return this.http.put<Memory>(url, memory, {headers: headers}).pipe(
         tap(() => console.log('Update memory: ' + memory.id)),
