@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { AuthGuard } from './user/auth.guard';
-//import { AuthGuard } from './user/auth.guard';
+
 
 const routes: Routes = [
   {

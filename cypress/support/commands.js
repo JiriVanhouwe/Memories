@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', () => {
-    const email = 'jiri.vanhouwe@gmail.com';
+    const email = 'kaat.loete@gmail.com';
   
     cy.request({
       method: 'POST',
@@ -14,4 +14,4 @@ Cypress.Commands.add('login', () => {
       url: '/api/account/register',
       body: { email, password },
     }).then((res) => localStorage.setItem('currentUser', res.body));
-  });
+  });  

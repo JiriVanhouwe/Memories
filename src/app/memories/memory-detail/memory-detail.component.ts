@@ -3,7 +3,6 @@ import { Memory } from '../memory';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryService } from '../memory.service';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
 
 
 @Component({

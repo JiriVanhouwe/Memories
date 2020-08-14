@@ -11,19 +11,19 @@ describe('Memories list test', function () {
           method: 'GET',
           url: '/memories',
           status: 200,
-          response: 'fixture:memories.json',
+          //response: 'fixture:memories.json',
          });
          cy.route({
-           delay: 2000,
+           delay: 10000,
            method: 'GET',
-           url: '/memories/?filter=ka',
+           url: '/memories/?filter=bier',
            status: 200,
-           response: 'fixture:kajakken.json',
-         }).as('getKAmemories');
+           //response: 'fixture:kajakken.json',
+         }).as('getBIERmemories');
 
         cy.visit('/memories');
-        cy.get('[data-cy=filterInput]').type('ka');
-        cy.wait(300);
+        cy.get('[data-cy=filterInput]').type('bier');
+        cy.wait(10000);
         cy.get('[data-cy=memoryCard]').should('have.length', 1);
       });
     });

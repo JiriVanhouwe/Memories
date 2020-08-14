@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FriendResolver } from './friend-resolver';
 import { FriendsComponent } from './friends/friends.component';
 import { AuthGuard } from '../user/auth.guard';
 
@@ -19,6 +18,6 @@ const routes : Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  exports : [FriendsComponent]
+  exports : [] //FriendsComponent
 })
 export class FriendsModule { }

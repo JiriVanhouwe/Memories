@@ -11,7 +11,7 @@ describe('Friends list test', function () {
           method: 'GET',
           url: '/friends',
           status: 200,
-          response: 'fixture:friends.json',
+          //response: 'fixture:friends.json',
          });
 
         cy.visit('/friends');

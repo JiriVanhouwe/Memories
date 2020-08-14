@@ -53,7 +53,7 @@ export class MemoryService {
 
     //POST MEMORY
     postMemory$(memory: Memory){
-      console.log("kom ik hier");
+    
       return this.http.post(`${environment.apiUrl}/memories/`, memory.toJSON()).pipe(
         tap(data => console.log('Post new memory: ' +JSON.stringify(memory))),
         catchError(this.handleError),

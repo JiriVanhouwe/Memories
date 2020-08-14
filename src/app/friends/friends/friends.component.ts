@@ -41,7 +41,10 @@ export class FriendsComponent implements OnInit {
   inviteFriend(): void{
     if(this._emailInput != null){
       this._memoryService.inviteNewUser(this._emailInput)
-      .subscribe(data => {this.message = data.toLocaleString()});
+      .subscribe(data => {
+        
+        this.message = data.toLocaleString()
+      });
     }   
 }
 

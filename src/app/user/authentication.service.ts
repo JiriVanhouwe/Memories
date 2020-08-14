@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 function parseJwt(token){
@@ -23,7 +24,7 @@ export class AuthenticationService {
   private _user$: BehaviorSubject<string>;
   public redirectUrl = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
     let parsedToken = parseJwt(this.tokenStorage); //token ophalen
     if(parsedToken){
       const expires = new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date(); //datum met expire date die we krijgen van backend
@@ -87,6 +88,7 @@ export class AuthenticationService {
       localStorage.removeItem(this._tokenKey);
       this._user$.next(null);     //er is niemand meer aangemeld
     }
+    this._router.navigate([`/memories/home`]);
   }
 
   checkUserNameAvailability = (email: string) : Observable<boolean> =>

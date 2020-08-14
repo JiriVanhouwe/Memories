@@ -35,7 +35,7 @@ const routes : Routes = [
     RouterModule.forChild(routes)  
   ],
   exports: [ 
-        MemoryListComponent]
+        ] //memorylistcomp
 })
 export class MemoriesModule { } 
 
