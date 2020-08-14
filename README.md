@@ -9,7 +9,7 @@ Met wat geluk heb je zelf enkele beelden geschoten maar het is niet ontdenkbaar 
 ## Opdracht
 Dit project was een opdracht in het tweede jaar toegepaste informatica en leverde me uiteindelijk een 16/20 op!
 
-**2. Algemene informatie**
+## Algemene informatie
 
 Indien u wenst in te loggen, kan ik aanraden om dat met jiri.vanhouwe@gmail.com te doen. Het wachtwoord Memories1@
 
