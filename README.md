@@ -1,27 +1,16 @@
-# MemoryApplication
+## Memories
+Toegepaste Informatica - Webapplicaties IV - 20-05-2020
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+Gerealiseerd door Jiri Vanhouwe onder begeleiding van lector Karine Samyn.
 
-## Development server
+**1. Concept**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Het overkomt iedereen wel eens: je mijmert over afgelopen zomer, een uitstap of evenement en je kan een gelukzalige glimlach niet onderdrukken. Kon je zo'n moment nog maar eens herbeleven...
+Met wat geluk heb je zelf enkele beelden geschoten maar het is niet ontdenkbaar dat jouw vrienden ook enkele parels op hun smartphone hebben staan. Zou het niet geweldig zijn als al deze foto’s op één plek verzameld worden? Wel, het kan!
 
-## Code scaffolding
+Met 'Memories' kan je in enkele klikken herinneringen delen met vrienden en naar hartenlust foto's toevoegen. Op die manier zal geen beeld je nog ontgaan en heb je op een eenvoudige wijze alle foto's van een uitstap verzameld.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**2. Algemene informatie**
 
-## Build
+Indien u wenst in te loggen, kan ik aanraden om dat met jiri.vanhouwe@gmail.com te doen. Op dat account heb ik de meeste data toegevoegd. Uiteraard mag u ook andere accounts gebruiken of zelf een aanmaken. Voor elk account luidt het wachtwoord Memories1@
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
